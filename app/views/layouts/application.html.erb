@@ -10,6 +10,13 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <header>
+    <%= link_to "signup",new_user_registration_path %>
+    <% if user_signed_in? %>
+    <%= link_to "signout",destroy_user_session_path,method: :delete %>
+    <% end %>
+  </header>
+
   <body>
     <%= yield %>
   </body>
