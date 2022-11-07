@@ -1,6 +1,7 @@
 class User::DreamsController < ApplicationController
   def index
     @dreams = Dream.all
+    @list = List.new
   end
 
   def show
@@ -8,14 +9,16 @@ class User::DreamsController < ApplicationController
   end
 
   def create
-    Dream.find_or_create_by(things:dream_params[:content])
-    #dream_paramsに入ってるcontentと同じthingsがcontentテーブルにあるか探すよ！なければ保存
+    @dream = Dream.find_or_create_by(content:dream_params[:content])
+    # dream_params に入ってる content と同じ content が Dream テーブルにあるか探す、なければ保存
+    List.find_or_create_by(user_id:current_user.id,dream_id:@dream.id)
+    # current_user_id と @dream の dream_id を List テーブルに保存
     redirect_to user_path(current_user.id)
   end
 
   private
 
   def dream_params
-    params.require(:dream).permit(:content,list: [:dream_id])
+    params.require(:dream).permit(:content)
   end
 end

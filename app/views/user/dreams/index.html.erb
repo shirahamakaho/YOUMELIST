@@ -2,7 +2,13 @@
 <p>Find me in app/views/user/dreams/index.html.erb</p>
 
 <% @dreams.each do |dream| %>
-<%= link_to dream_path(dream.id) do %>
-<%= dream.content %>
-<% end %>
+  <%= link_to dream_path(dream.id) do %>
+    <%= dream.id %>
+    <%= dream.content %>
+  <% end %>
+  <%= form_with model:@list,url:lists_path,method: :post do |f| %>
+  <%= f.hidden_field:dream_id,:value => dream.id %>
+  <%= f.hidden_field:user_id,:value => current_user.id %>
+  <%= f.submit %>
+  <% end %><br>
 <% end %>

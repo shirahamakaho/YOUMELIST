@@ -11,10 +11,11 @@
   </head>
 
   <header>
-    <%= link_to "signup",new_user_registration_path %>
     <%= link_to "top",root_path %>
+    <%= link_to "signup",new_user_registration_path %>
     <% if user_signed_in? %>
     <%= link_to "signout",destroy_user_session_path,method: :delete %>
+    <%= link_to "mypage",user_path(current_user.id) %>
     <% end %>
   </header>
 
