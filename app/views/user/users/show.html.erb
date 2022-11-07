@@ -1,2 +1,7 @@
 <h1>User::Users#show</h1>
 <p>Find me in app/views/user/users/show.html.erb</p>
+<%= form_with model:@dream do |f| %>
+<%= f.text_field:content %>
+<%= f.submit %>
+<% end %>
+<%= link_to "dream一覧",dreams_path %>

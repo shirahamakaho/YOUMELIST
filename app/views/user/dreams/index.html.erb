@@ -1,2 +1,8 @@
 <h1>User::Dreams#index</h1>
 <p>Find me in app/views/user/dreams/index.html.erb</p>
+
+<% @dreams.each do |dream| %>
+<%= link_to dream_path(dream.id) do %>
+<%= dream.content %>
+<% end %>
+<% end %>
