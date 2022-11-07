@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   scope module: :user do
     resources:dreams,only:[:index,:show,:create]
     resources:users,only:[:show,:edit,:update]
-    resources:lists,only:[:show,:create]
+    resources:lists,only:[:show,:create,:destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

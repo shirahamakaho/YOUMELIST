@@ -1,3 +1,5 @@
-<h1>User::Dreams#show</h1>
-<p>Find me in app/views/user/dreams/show.html.erb</p>
-<%= @dream.content %>
+<h1><%= @dream.content %></h1>
+<h3>Dreamers</h3>
+<% @dream.users.each do |user| %>
+<%= user.name %>
+<% end %>

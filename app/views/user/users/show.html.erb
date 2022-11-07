@@ -1,10 +1,11 @@
-<h1>User::Users#show</h1>
-<p>Find me in app/views/user/users/show.html.erb</p>
+<h1>My Dream List</h1>
+
 <%= form_with model:@dream,url:dreams_path,method: :post do |f| %>
 <%= f.text_field:content %>
 <%= f.submit %>
 <% end %>
 <% @lists.each do |list| %>
-<%= list.dream.content %><br>
+<%= list.dream.content %>
+<%= link_to "list out",list_path(list),method: :delete %><br>
 <% end %>
 <%= link_to "dream一覧",dreams_path %>
