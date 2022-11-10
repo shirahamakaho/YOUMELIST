@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :lists
   has_many :dreams,through: :lists
+  validates :name, presence: true
 end

@@ -6,7 +6,6 @@ class User::DreamsController < ApplicationController
 
   def show
     @dream = Dream.find(params[:id])
-    # @user = User.find(params[:id])
   end
 
   def create
