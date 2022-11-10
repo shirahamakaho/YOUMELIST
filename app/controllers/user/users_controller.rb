@@ -1,8 +1,9 @@
 class User::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @dream = Dream.new
-    @lists = current_user.lists.all
+    @newdream = Dream.new
+    @dream = Dream.find(params[:id])
+    @lists = @user.lists.all
   end
 
   def edit

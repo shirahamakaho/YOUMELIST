@@ -1,5 +1,7 @@
 <h1><%= @dream.content %></h1>
 <h3>Dreamers</h3>
 <% @dream.users.each do |user| %>
-<%= user.name %>
+<%= link_to user_path(user.id) do %>
+  <%= user.name %>
+<% end %>
 <% end %>
