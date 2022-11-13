@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
   scope module: :user do
     resources:dreams,only:[:index,:show,:create] do
-      resources:comments,only:[:create,:update,:destroy]
+      resources:comments,only:[:create,:update,:destroy]do
+        resource:favorites,only:[:create,:destroy]
+      end
     end
     resources:users,only:[:show,:edit,:update]
     resources:lists,only:[:show,:create,:destroy]
