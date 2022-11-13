@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'homes#top'
-  
+
   devise_for :users,controllers:{
     registrations:"user/registrations",
     sessions:"user/sessions"
@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
 
   scope module: :user do
-    resources:dreams,only:[:index,:show,:create]
+    resources:dreams,only:[:index,:show,:create] do
+      resources:comments,only:[:create,:update,:destroy]
+    end
     resources:users,only:[:show,:edit,:update]
     resources:lists,only:[:show,:create,:destroy]
   end

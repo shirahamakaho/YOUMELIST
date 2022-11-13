@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_13_101831) do
+ActiveRecord::Schema.define(version: 2022_11_13_114748) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 2022_11_13_101831) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_favorites_on_comment_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "lists", force: :cascade do |t|
     t.integer "user_id"
     t.integer "dream_id"
@@ -66,4 +75,6 @@ ActiveRecord::Schema.define(version: 2022_11_13_101831) do
 
   add_foreign_key "comments", "dreams"
   add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "comments"
+  add_foreign_key "favorites", "users"
 end

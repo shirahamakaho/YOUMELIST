@@ -1,7 +1,27 @@
 <h1><%= @dream.content %></h1>
+
+<p>*post comment !</p>
+<%= form_with(model:[@dream,@comment], method: :post) do |f| %>
+<%= f.text_area :comment %>
+<%= f.hidden_field :dream_id, value: @dream.id %>
+<%= f.submit %>
+<% end %>
+
+<p>* comments</p>
+<% @comments.each do |comment| %>
+<%= comment.id %>
+<%= comment.comment %>
+<%= comment.user.name %>
+<% if comment.user.id == current_user.id %>
+<%= link_to "edit",dream_path(@dream,comment.id) %>
+<%= link_to "delete",dream_comment_path(@dream,comment.id),method: :delete %>
+<% end %>
+<% end %>
+
 <h3>Dreamers</h3>
+
 <% @dream.users.each do |user| %>
 <%= link_to user_path(user.id) do %>
-  <%= user.name %>
+<%= user.name %>
 <% end %>
 <% end %>

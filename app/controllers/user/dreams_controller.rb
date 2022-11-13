@@ -6,6 +6,9 @@ class User::DreamsController < ApplicationController
 
   def show
     @dream = Dream.find(params[:id])
+    @comments = @dream.comments.all
+    @comment = current_user.comments.new
+    # @editcomment = Comment.find(params[:id])
   end
 
   def create
