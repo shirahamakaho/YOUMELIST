@@ -4,12 +4,13 @@
 <% else %>
 <h1><%= @user.name %>'s Dream List</h1>
 <% end %>
+<p><%= @user.introduction %></p>
 <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
 <%= f.text_field:content %><br>
 <%= f.submit %>
 <% end %>
 <% @lists.each do |list| %>
-<%= link_to dream_path(@dream.id) do %>
+<%= link_to dream_path(list.dream.id) do %>
   <%= list.dream.content %>
 <% end %>
 <%= link_to "list out",list_path(list),method: :delete %><br>
