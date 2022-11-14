@@ -1,17 +1,16 @@
 class User::UsersController < ApplicationController
+  before_action :set_user
+
   def show
-    @user = User.find(params[:id])
     @newdream = Dream.new
     @dream = Dream.find(params[:id])
     @lists = @user.lists.all
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
@@ -19,9 +18,18 @@ class User::UsersController < ApplicationController
     end
   end
 
+  def favorites
+    favorites = Favorite.where(user_id:@user.id).pluck(:comment_id)
+    @favorite_comments = Comment.find(favorites)
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name,:introduction)
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 end

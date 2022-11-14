@@ -5,6 +5,7 @@
 <h1><%= @user.name %>'s Dream List</h1>
 <% end %>
 <p><%= @user.introduction %></p>
+<p><%= link_to "♡comments",favorites_user_path(@user) %></p>
 <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
 <%= f.text_field:content %><br>
 <%= f.submit %>

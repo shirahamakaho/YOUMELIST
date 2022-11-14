@@ -11,6 +11,7 @@
 <% @comments.each do |comment| %>
 <%= comment.id %>
 <%= comment.comment %>
+by <%= comment.user.name %>
 <% if comment.favorited?(current_user) %>
   <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :delete do %>
   <span style="color:red;">♡</span>
@@ -19,13 +20,12 @@
   <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :post do %>
   <span>♡</span>
   <% end %>
-<% end %>
-<%= comment.user.name %>
+<% end %><br>
 <% if comment.user.id == current_user.id %>
 <!--%= link_to "edit",dream_path(@dream,comment.id) %>-->
 <!--comment.idを渡してコメントフォームに編集するコメントを表示-->
 <%= link_to "edit",dream_path(@dream,comment.id) %>
-<%= link_to "delete",dream_comment_path(@dream,comment.id),method: :delete %>
+<%= link_to "delete",dream_comment_path(@dream,comment.id),method: :delete %><br>
 <% end %>
 <% end %>
 
