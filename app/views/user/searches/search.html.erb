@@ -1,7 +1,7 @@
 <h1>User::Searches#search</h1>
 <p>Find me in app/views/user/searches/search.html.erb</p>
 
-<p>"<%= params[:word] %>"s result</p>
+<p>"<%= @word %>"s result</p>
 
 <% @dreams.each do |dream| %>
 <%= link_to dream_path(dream.id) do %>

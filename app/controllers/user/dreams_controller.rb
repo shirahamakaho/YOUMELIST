@@ -1,6 +1,13 @@
 class User::DreamsController < ApplicationController
+
   def index
-    @dreams = Dream.all
+    if params[:latest]
+      @dreams = Dream.latest
+    elsif params[:old]
+      @dreams = Dream.old
+    else
+      @dreams = Dream.all
+    end
     @list = List.new
   end
 
@@ -24,4 +31,5 @@ class User::DreamsController < ApplicationController
   def dream_params
     params.require(:dream).permit(:content)
   end
+
 end

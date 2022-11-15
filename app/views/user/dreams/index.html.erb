@@ -7,10 +7,16 @@
 <%= f.submit "search!" %>
 <% end %>
 
+<%= link_to "新しい順",dreams_path(latest: "true") %>
+<%= link_to "古い順",dreams_path(old: "true") %>
+<!--%= link_to "なかま順",dreams_path(user_count: "true") %>-->
+
+<div>
 <% @dreams.each do |dream| %>
   <%= link_to dream_path(dream.id) do %>
     <%= dream.id %>
     <%= dream.content %>
+    (<%= dream.users.count %>)
   <% end %>
   <%= form_with model:@list,url:lists_path,method: :post do |f| %>
   <%= f.hidden_field:dream_id,:value => dream.id %>
@@ -18,3 +24,4 @@
   <%= f.submit "list in" %>
   <% end %><br>
 <% end %>
+</div>
