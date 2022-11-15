@@ -9,7 +9,7 @@ class User::ListsController < ApplicationController
 
   def destroy
     @list = List.find(params[:id])
-    @list.destroy
+    @list.delete
     redirect_to user_path(current_user.id)
   end
 
