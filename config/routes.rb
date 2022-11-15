@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root 'homes#top'
 
   devise_for :users,controllers:{
     registrations:"user/registrations",
@@ -8,6 +7,9 @@ Rails.application.routes.draw do
   devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
+  
+  root 'homes#top'
+  
   namespace :admin do
   end
 
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
       end
     end
     resources:lists,only:[:create,:destroy]
+    get "search" => "searches#search"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
