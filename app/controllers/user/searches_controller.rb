@@ -1,7 +1,7 @@
 class User::SearchesController < ApplicationController
   def search
     @range = params[:range]
-    @dreams = Dream.looks(params[:search],params[:word])
     @word = params[:word]
+    @dreams = Dream.looks(params[:search],@)
   end
 end
