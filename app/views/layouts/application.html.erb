@@ -14,11 +14,11 @@
   <header>
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <%= link_to "TOP",root_path %>
-        <%= link_to "みんなのユメ",dreams_path %>
+        <p><i class="fas fa-home"></i><%= link_to "TOP",root_path %></p>
+        <p><i class="fas fa-star"></i><%= link_to "みんなのユメ",dreams_path %></p>
         <% if user_signed_in? %>
-        <%= link_to "MYLIST",user_path(current_user.id) %>
-        <%= link_to "ログアウト",destroy_user_session_path,method: :delete %>
+        <p><i class="fas fa-list"></i><%= link_to "MYLIST",user_path(current_user.id) %></p>
+        <p><i class="fas fa-sign-out-alt"></i><%= link_to "ログアウト",destroy_user_session_path,method: :delete %></p>
         hello <%= current_user.name %> !
         <% else %>
         <%= link_to "signup",new_user_registration_path %>

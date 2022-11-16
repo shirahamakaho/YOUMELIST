@@ -4,37 +4,47 @@
     </div>
 
     <div class="row justify-content-center">
-      <p class="text-center">「ユメ」を共有しよう。<br>
+      <p class="text-center">
+        「ユメ」を共有しよう。<br>
       リストを作ったり、コメントを残すには、ログインが必要です。<br>
       <% if user_signed_in? %>
       <%= link_to "マイページへ",user_path(current_user.id) %>
       <% else %>
       <span><%= link_to"YOUMELISTを見てみる",dreams_path,class:"btn" %></span>
-      <button style="background-color:#ffdbdb"><%= link_to"新規登録する",new_user_registration_path,class:"btn" %></button></p>
+      <span><%= link_to"新規登録する",new_user_registration_path,class:"btn" %></span></p>
     </div>
 
   <div class="row justify-content-center">
       <%= form_with model:@user,url:user_session_path do |f| %>
       <div class="field row">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="col-3">
+          <%= f.label :email %>
+        </div>
+        <div class="col-3">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
       </div>
 
       <div class="field row">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password" %>
-        <div class="actions">
-        <%= f.submit "Log in" %>
+        <div class="col-3">
+          <%= f.label :password %>
+        </div>
+        <div class="col-3">
+          <%= f.password_field :password, autocomplete: "current-password" %>
         </div>
       </div>
+        <div class="field row">
+          <%= f.submit "Log in" %>
+        </div>
+    </div>
 
     <% end %>
     <% end %>
 
     </div>
 
-    <div class="row justify-content-center mt-3" style="background-color:#ffdbdb">
-      <h3>What's YOUMELIST ?</h3>
+    <div class="row justify-content-center mt-3">
+      <h3 style="background-color:#ffdbdb">What's YOUMELIST ?</h3>
     </div>
 
     <div class="row justify-content-center" style="background-color:#ffffff">
@@ -48,9 +58,12 @@
     </div>
 
     <div class="row justify-content-center" style="background-color:#ffffff">
-      <p class="text-center">このマークのついたコメントは、その「ユメ」を持っている人のコメントです。</p>
+      <p class="text-center">このマークのついたコメントは、その「ユメ」を持っている人のコメントです。<br>
+      コメントにはいいねをつける事ができます<i class="far fa-heart"></i></p>
     </div>
 
      <div class="row justify-content-center" style="background-color:#efffff">
-      <p class="text-center">コメントにはいいねをつける事ができます！</p>
+      <p class="text-center"><i class="far fa-user"></i>は仲間の数、
+      <i class="far fa-comment-dots"></i>はコメントの数を表わしています。<br>
+      仲間が0人になったユメは自動的に無くなります。</p>
     </div>

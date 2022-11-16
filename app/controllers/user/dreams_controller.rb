@@ -8,6 +8,7 @@ class User::DreamsController < ApplicationController
     else
       @dreams = Dream.all
     end
+    @latestdream = Dream.limit(3).order("created_at DESC")
     @list = List.new
   end
 

@@ -5,19 +5,19 @@
       <p><%= @user.name %></p>
       <p><%= @user.introduction %></p>
       <% if @user.id == current_user.id %>
-      <p><%= link_to "♡comments",favorites_user_path(@user) %></p>
-      <p><%= link_to "edit profile",edit_user_path(@user.id) %></p>
+      <p><i class="fas fa-heart" style="color:red;"></i><%= link_to "comments",favorites_user_path(@user) %></p>
+      <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id) %></p>
       <% end %>
-      <p>ユメ:<%= @user.lists.count %>コ</p>
-      <p>コメント数:<%= @user.comments.count %></p>
+      <p><i class="fas fa-star"></i>ユメ:<%= @user.lists.count %></p>
+      <p><i class="fas fa-comment-dots"></i>コメント数:<%= @user.comments.count %></p>
     </div>
 
-    <div class="col-9">
+    <div class="col-8">
       <div class="card">
         <div style="background-color:#efffff" class="card-header">
           <div class="row justify-content-between">
             <p>
-              <span class="h3 px-2">YOUMELIST</span> by <%= @user.name %>
+              <span class="h3 px-2">LIST</span> by <%= @user.name %>
             </p>
             <div class="px-2">
               <% if @user.id == current_user.id %>
@@ -29,24 +29,22 @@
             </div>
           </div>
         </div>
-        <table class="table table-sm">
-      <tbody>
+        <ul class="list-group list-group-flush text-center">
         <% @lists.each do |list| %>
-        <tr>
-          <td>
+          <li class="list-group-item">
           <%= link_to dream_path(list.dream.id) do %>
-            <%= list.dream.content %><br>
+            <%= list.dream.content %>
           <% end %>
-          </td>
           <% if @user.id == current_user.id %>
-            <td>
-            <%= link_to "list out",list_path(list),method: :delete %><br>
-            </td>
+            <span>
+              <%= link_to list_path(list),method: :delete do %>
+              <i class="fas fa-times"></i><br>
+              <% end %>
+            </span>
           <% end %>
-          </tr>
+          </li>
         <% end %>
-        </tbody>
-    </table>
+    </div>
     </div>
   </div>
 
