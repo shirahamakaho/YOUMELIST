@@ -1,5 +1,20 @@
-<h1><%= @dream.content %></h1>
+<div class="container">
 
+<div class="row">
+  <div class="col-3">
+    <p>なかま</p>
+    <% @dream.users.each do |user| %>
+    <%= link_to user_path(user.id) do %>
+    <%= user.name %>
+    <% end %>
+    <% end %>
+    <%= link_to "もっと見る",dreams_path %>
+  </div>
+
+  <div class="col-9">
+    <h1><%= @dream.content %></h1>
+    M<%= @dream.users.count %>
+    C<%= @dream.comments.count %>
 <p>*post comment !</p>
 <%= form_with(model:[@dream,@comment], method: :post) do |f| %>
 <%= f.text_area :comment %>
@@ -9,9 +24,9 @@
 
 <p>* comments</p>
 <% @comments.each do |comment| %>
-<%= comment.id %>
+<%= comment.user.name %>
+<%= comment.created_at %><br>
 <%= comment.comment %>
-by <%= comment.user.name %>
 <% if comment.favorited?(current_user) %>
   <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :delete do %>
   <span style="color:red;">♡</span>
@@ -28,11 +43,7 @@ by <%= comment.user.name %>
 <%= link_to "delete",dream_comment_path(@dream,comment.id),method: :delete %><br>
 <% end %>
 <% end %>
+</div>
+ </div>
 
-<h3>Dreamers</h3>
-
-<% @dream.users.each do |user| %>
-<%= link_to user_path(user.id) do %>
-<%= user.name %>
-<% end %>
-<% end %>
+</div>

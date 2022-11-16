@@ -1,10 +1,15 @@
-<h1>User::Searches#search</h1>
-<p>Find me in app/views/user/searches/search.html.erb</p>
+<div class="container">
+  <div class="row">
 
-<p>"<%= @word %>"s result</p>
-
-<% @dreams.each do |dream| %>
-<%= link_to dream_path(dream.id) do %>
-<%= dream.content %><br>
-<% end %>
-<% end %>
+    <div class="col-3"></div>
+    <div class="col-9">
+      <div class="row">
+        <p>"<%= @word %>"s result</p>
+        <% @dreams.each do |dream| %>
+        <%= link_to dream_path(dream.id) do %>
+        <%= dream.content %><br>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+</div>

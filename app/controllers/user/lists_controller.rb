@@ -16,6 +16,6 @@ class User::ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:user_id,:dream_id)
+    params.require(:list).permit(:user_id,:dream_id,:memo)
   end
 end

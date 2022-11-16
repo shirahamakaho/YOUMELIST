@@ -1,23 +1,56 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<div class="row justify-content-center">
+    <!--<img src="../../assets/images/YOUMELIST.png">-->
+    <%= image_tag "YOUMELIST.png",size:"300x120"%>
+    </div>
 
-<% if user_signed_in? %>
-  <%= link_to "ゆーざーぺーじ",user_path(current_user.id) %>
-<% else %>
-  <%= form_with model:@user,url:user_session_path do |f| %>
+    <div class="row justify-content-center">
+      <p class="text-center">YOUMELIST はあなたの「やりたいことリスト」を作って、共有出来るサイトです。<br>
+      リストを作ったり、コメントを残すには、ログインが必要です。<br>
+      <% if user_signed_in? %>
+      <%= link_to "マイページへ",user_path(current_user.id) %>
+      <% else %>
+      <span><%= link_to"YOUMELISTを見てみる",dreams_path,class:"btn" %></span>
+      <button style="background-color:#ffdbdb"><%= link_to"新規登録する",new_user_registration_path,class:"btn" %></button></p>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <div class="row justify-content-center">
+      <%= form_with model:@user,url:user_session_path do |f| %>
+      <div class="field row">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+      <div class="field row">
+        <%= f.label :password %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+        <div class="actions">
+        <%= f.submit "Log in" %>
+        </div>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-<% end %>
+    <% end %>
+    <% end %>
+
+    </div>
+
+    <div class="row justify-content-center mt-3" style="background-color:#ffdbdb">
+      <h3>What's YOUMELIST ?</h3>
+    </div>
+
+    <div class="row justify-content-center" style="background-color:#ffffff">
+      <p class="text-center">マイページで「ユメ」を入力する事で、あなたのリストに追加されます。<br>
+      この時表示されている数字は、同じ「ユメ」をもつ仲間の数です。</p>
+    </div>
+
+    <div class="row justify-content-center" style="background-color:#efffff">
+      <p class="text-center">「ユメ」では、進捗を報告したり、情報を共有したり。<br>
+      自由にコメントを残す事ができます。</p>
+    </div>
+
+    <div class="row justify-content-center" style="background-color:#ffffff">
+      <p class="text-center">このマークのついたコメントは、その「ユメ」を持っている人のコメントです。</p>
+    </div>
+
+     <div class="row justify-content-center" style="background-color:#efffff">
+      <p class="text-center">コメントにはいいねをつける事ができます！</p>
+    </div>

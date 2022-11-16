@@ -13,6 +13,7 @@ class User::DreamsController < ApplicationController
 
   def show
     @dream = Dream.find(params[:id])
+    @list = List.new
     @comments = @dream.comments.all
     @comment = current_user.comments.new
     # @editcomment = Comment.find(params[:id])
