@@ -26,22 +26,24 @@
   <div class="col-9">
     <div class="row">
       <% @dreams.each do |dream| %>
+      <div class="card">
         <%= link_to dream_path(dream.id) do %>
-          <%= dream.id %>
           <%= dream.content %>
-        <% end %>
-        M<%= dream.users.count %>
-        C<%= dream.comments.count %>
-        <% if user_signed_in? %>
-        <%= form_with model:@list,url:lists_path,method: :post do |f| %>
-        <%= f.hidden_field:dream_id,:value => dream.id %>
-        <%= f.hidden_field:user_id,:value => current_user.id %>
-        <%= f.submit "list in" %>
-        <% end %>
-        <% end %>
+          <% end %>
+          M<%= dream.users.count %>
+          C<%= dream.comments.count %>
+          <% if user_signed_in? %>
+          <%= form_with model:@list,url:lists_path,method: :post do |f| %>
+          <%= f.hidden_field:dream_id,:value => dream.id %>
+          <%= f.hidden_field:user_id,:value => current_user.id %>
+          <%= f.submit "list in" %>
+          <% end %>
+          <% end %>
+        </div>
       <% end %>
+      </div>
     </div>
+
   </div>
-</div>
 
 </div>
