@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
-  
+
   root 'homes#top'
-  
+
   namespace :admin do
   end
 
@@ -25,7 +25,9 @@ Rails.application.routes.draw do
       end
     end
     resources:lists,only:[:create,:destroy]
-    get "search" => "searches#search"
+    get "search" => "searches#search"# 検索用
+    get "/users/:id/unsubscribe" => "users#unsubscribe",as: 'unsubscribe'
+    patch "/users/:id/withdrawal" => "users#withdrawal",as: 'withdrawal'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

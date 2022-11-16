@@ -22,6 +22,13 @@ class User::UsersController < ApplicationController
     favorites = Favorite.where(user_id:@user.id).pluck(:comment_id)
     @favorite_comments = Comment.find(favorites)
   end
+  
+  def withdrawal
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    reset_session
+    redirect_to root_path
+  end
 
   private
 

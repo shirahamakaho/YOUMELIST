@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   validates :email, uniqueness: true
   validates :name, presence: true
+
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 end
