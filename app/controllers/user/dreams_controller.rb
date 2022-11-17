@@ -8,11 +8,13 @@ class User::DreamsController < ApplicationController
     else
       @dreams = Dream.all
     end
+    @latestdream = Dream.limit(3).order("created_at DESC")
     @list = List.new
   end
 
   def show
     @dream = Dream.find(params[:id])
+    @list = List.new
     @comments = @dream.comments.all
     @comment = current_user.comments.new
     # @editcomment = Comment.find(params[:id])

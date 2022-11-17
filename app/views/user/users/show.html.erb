@@ -1,22 +1,51 @@
-<% if @user.id == current_user.id %>
-<h1>My Dream List</h1>
-<%= link_to "edit profile",edit_user_path(@user.id) %>
-<% else %>
-<h1><%= @user.name %>'s Dream List</h1>
-<% end %>
-<p><%= @user.introduction %></p>
-<p><%= link_to "♡comments",favorites_user_path(@user) %></p>
-<%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
-<%= f.text_field:content %><br>
-<%= f.submit %>
-<% end %>
-<% @lists.each do |list| %>
-<%= link_to dream_path(list.dream.id) do %>
-  <%= list.id %>
-  <%= list.dream.content %><br>
-<% end %>
-<% if @user.id == current_user.id %>
-<%= link_to "list out",list_path(list),method: :delete %><br>
-<% end %>
-<% end %>
-<%= link_to "dream一覧",dreams_path %>
+<div class="container">
+
+  <div class="row justify-content-center mt-3">
+    <div class="col-3">
+      <p><%= @user.name %></p>
+      <p><%= @user.introduction %></p>
+      <% if @user.id == current_user.id %>
+      <p><i class="fas fa-heart" style="color:red;"></i><%= link_to "comments",favorites_user_path(@user) %></p>
+      <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id) %></p>
+      <% end %>
+      <p><i class="fas fa-star"></i>ユメ:<%= @user.lists.count %></p>
+      <p><i class="fas fa-comment-dots"></i>コメント数:<%= @user.comments.count %></p>
+    </div>
+
+    <div class="col-8">
+      <div class="card">
+        <div style="background-color:#efffff" class="card-header">
+          <div class="row justify-content-between">
+            <p>
+              <span class="h3 px-2">LIST</span> by <%= @user.name %>
+            </p>
+            <div class="px-2">
+              <% if @user.id == current_user.id %>
+                <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
+                <%= f.text_field:content %>
+                <%= f.submit class:"text-white btn btn-outline btn-light" %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush text-center">
+        <% @lists.each do |list| %>
+          <li class="list-group-item">
+          <%= link_to dream_path(list.dream.id) do %>
+            <%= list.dream.content %>
+          <% end %>
+          <% if @user.id == current_user.id %>
+            <span>
+              <%= link_to list_path(list),method: :delete do %>
+              <i class="fas fa-times"></i><br>
+              <% end %>
+            </span>
+          <% end %>
+          </li>
+        <% end %>
+    </div>
+    </div>
+  </div>
+
+</div>

@@ -6,21 +6,33 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <body>
   <header>
-    <%= link_to "top",root_path %>
-    <%= link_to "signup",new_user_registration_path %>
-    <% if user_signed_in? %>
-    <%= link_to "signout",destroy_user_session_path,method: :delete %>
-    <%= link_to "mypage",user_path(current_user.id) %>
-    <p>hello <%= current_user.name %> !</p>
-    <% end %>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <p><i class="fas fa-home"></i><%= link_to "TOP",root_path %></p>
+        <p><i class="fas fa-star"></i><%= link_to "みんなのユメ",dreams_path %></p>
+        <% if user_signed_in? %>
+        <p><i class="fas fa-list"></i><%= link_to "MYLIST",user_path(current_user.id) %></p>
+        <p><i class="fas fa-sign-out-alt"></i><%= link_to "ログアウト",destroy_user_session_path,method: :delete %></p>
+        hello <%= current_user.name %> !
+        <% else %>
+        <%= link_to "signup",new_user_registration_path %>
+        <% end %>
+      </div>
+    </nev>
   </header>
 
-  <body>
+  <main>
     <%= yield %>
+  </main>
+
+  <footer>
+
+  </footer>
   </body>
 </html>
