@@ -1,5 +1,5 @@
 <div class="container">
-<div class="row h-75 my-3 py-5 px-5 justify-content-center" style="background-color:#48d1cc">
+<div class="row h-75 my-4 py-5 px-5 justify-content-center" style="background-color:#afeeee">
   <div class="col-5 offset-1 text-center">
     <h1 class="text-white"><%= @dream.content %></h1>
     <p class="text-white">最新コメント何日前</p>
@@ -48,14 +48,14 @@
           </div>
         </div>
           <%= f.hidden_field :dream_id, value: @dream.id %>
-        <div class="col auto">
-          <%= f.submit class:"form-control" %>
+        <div class="col auto mt-2">
+          <%= f.submit class:"form-control btn text-white",style:"background-color:#ff7f7f" %>
         </div>
         <% end %>
-      <p><i class="fas fa-comments"></i>みんなのコメント</p>
+      <p><i class="fas fa-comments mt-4"></i>みんなのコメント</p>
       <% @comments.each do |comment| %>
 
-      <div class="card my-2">
+      <div class="card mt-2">
         <div class="card-body">
           <div class="card-title">
             <%= comment.user.name %>

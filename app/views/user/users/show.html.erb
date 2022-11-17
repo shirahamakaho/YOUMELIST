@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container text-dark">
 
-  <div class="row justify-content-center mt-3">
+  <div class="row justify-content-center mt-4">
     <div class="col-3">
       <div class="card">
         <div class="card-body">
       <p><%= @user.name %></p>
       <p><%= @user.introduction %></p>
       <% if @user.id == current_user.id %>
-      <p><i class="fas fa-heart" style="color:#ff7f7f"></i><%= link_to "comments",favorites_user_path(@user) %></p>
-      <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id) %></p>
+      <p><i class="fas fa-heart" style="color:#ff7f7f"></i><%= link_to "comments",favorites_user_path(@user),class:"text-dark" %></p>
+      <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id),class:"text-dark" %></p>
       <% end %>
       <p><i class="fas fa-star"></i>ユメ:<%= @user.lists.count %></p>
       <p><i class="fas fa-comment-dots"></i>コメント数:<%= @user.comments.count %></p>
@@ -27,7 +27,7 @@
               <% if @user.id == current_user.id %>
                 <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
                 <%= f.text_field:content %>
-                <%= f.submit class:"text-white btn btn-outline btn-light" %>
+                <%= f.submit class:"text-white btn",style:"background-color:#ff7f7f" %>
                 <% end %>
               <% end %>
             </div>

@@ -12,16 +12,20 @@
 
   <body>
   <header>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar" style="background-color:#20b2aa">
       <div class="container">
-        <p style="color:#48d1cc"><i class="fas fa-home"></i><span><%= link_to "TOP",root_path %></span></p>
-        <p style="color:#48d1cc"><i class="fas fa-star"></i><%= link_to "みんなのユメ",dreams_path %></p>
+        <p><i class="fas fa-home" style="color:white"></i>
+        <%= link_to "TOP",root_path,class:"text-white" %></p>
+        <p><i class="fas fa-star" style="color:white"></i>
+        <%= link_to "みんなのユメ",dreams_path,class:"text-white" %></p>
         <% if user_signed_in? %>
-        <p style="color:#48d1cc"><i class="fas fa-list"></i><%= link_to "MYLIST",user_path(current_user.id) %></p>
-        <p style="color:#48d1cc"><i class="fas fa-sign-out-alt"></i><%= link_to "ログアウト",destroy_user_session_path,method: :delete %></p>
-        <p style="color:#48d1cc">hello <%= current_user.name %> !</p>
+        <p><i class="fas fa-list" style="color:white"></i>
+        <%= link_to "MYLIST",user_path(current_user.id),class:"text-white" %></p>
+        <p><i class="fas fa-sign-out-alt" style="color:white"></i>
+        <%= link_to "ログアウト",destroy_user_session_path,method: :delete,class:"text-white" %></p>
+        <p style="text-white">hello <%= current_user.name %> !</p>
         <% else %>
-        <p style="color:#48d1cc"><%= link_to "signup",new_user_registration_path %></p>
+        <p><%= link_to "signup",new_user_registration_path,class:"text-white" %></p>
         <% end %>
       </div>
     </nev>
