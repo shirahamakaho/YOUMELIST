@@ -2,22 +2,26 @@
 
   <div class="row justify-content-center mt-3">
     <div class="col-3">
+      <div class="card">
+        <div class="card-body">
       <p><%= @user.name %></p>
       <p><%= @user.introduction %></p>
       <% if @user.id == current_user.id %>
-      <p><i class="fas fa-heart" style="color:red;"></i><%= link_to "comments",favorites_user_path(@user) %></p>
+      <p><i class="fas fa-heart" style="color:#ff7f7f"></i><%= link_to "comments",favorites_user_path(@user) %></p>
       <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id) %></p>
       <% end %>
       <p><i class="fas fa-star"></i>ユメ:<%= @user.lists.count %></p>
       <p><i class="fas fa-comment-dots"></i>コメント数:<%= @user.comments.count %></p>
     </div>
+    </div>
+    </div>
 
-    <div class="col-8">
+    <div class="col-7">
       <div class="card">
-        <div style="background-color:#efffff" class="card-header">
+        <div style="background-color:#afeeee" class="card-header">
           <div class="row justify-content-between">
             <p>
-              <span class="h3 px-2">LIST</span> by <%= @user.name %>
+              <span class="h3 px-2 text-dark">LIST</span> by <%= @user.name %>
             </p>
             <div class="px-2">
               <% if @user.id == current_user.id %>
@@ -31,14 +35,16 @@
         </div>
         <ul class="list-group list-group-flush text-center">
         <% @lists.each do |list| %>
-          <li class="list-group-item">
+          <li class="list-group-item d-flex justify-content-between">
           <%= link_to dream_path(list.dream.id) do %>
-            <%= list.dream.content %>
+            <span class="text-dark">
+              <%= list.dream.content %>
+            </span>
           <% end %>
           <% if @user.id == current_user.id %>
             <span>
               <%= link_to list_path(list),method: :delete do %>
-              <i class="fas fa-times"></i><br>
+              <span style="color:#ff7f7f"><i class="fas fa-times"></i></span>
               <% end %>
             </span>
           <% end %>
