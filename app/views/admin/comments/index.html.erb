@@ -1,0 +1,9 @@
+<h1>コメント一覧</h1>
+<% @comments.each do |comment| %>
+<%= comment.comment %>
+<%= comment.user.name %>
+<% end %>
+
+<%= link_to "ユーザー一覧",admin_users_path %>
+<%= link_to "ユメ一覧",admin_dreams_path %>
+<%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>

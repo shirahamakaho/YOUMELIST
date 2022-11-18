@@ -13,12 +13,12 @@ class User < ApplicationRecord
     profile_image.variant(resize: "#{width}x#{height}^", gravity: "center", crop: "#{width}x#{height}+0+0").processed
   end
 
-  has_many :lists
+  has_many :lists, dependent: :destroy
   has_many :dreams,through: :lists
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  validates :email, uniqueness: true
+  # validates :email, uniqueness: true
   validates :name, presence: true
 
   def active_for_authentication?

@@ -4,7 +4,6 @@ class User::UsersController < ApplicationController
 
   def show
     @newdream = Dream.new
-    @dream = Dream.find(params[:id])
     @lists = @user.lists.all
   end
 

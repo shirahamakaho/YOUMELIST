@@ -1,0 +1,9 @@
+<h1>ユメ一覧</h1>
+<% @dreams.each do |dream| %>
+<%= dream.content %>
+<%= link_to "削除",admin_dream_path(dream.id),method: :delete %>
+<% end %>
+
+<%= link_to "コメント一覧",admin_comments_path %>
+<%= link_to "ユーザー一覧",admin_users_path %>
+<%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>

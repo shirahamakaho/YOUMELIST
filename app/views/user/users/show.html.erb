@@ -16,9 +16,11 @@
 
       <div class="card border-0">
         <div class="card-body">
+          <% if user_signed_in? %>
       <% if @user.id == current_user.id %>
       <p><i class="fas fa-heart" style="color:#ff7f7f"></i><%= link_to "comments",favorites_user_path(@user),class:"text-dark" %></p>
       <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id),class:"text-secondary" %></p>
+      <% end %>
       <% end %>
       <p><i class="fas fa-star"></i>ユメ:<%= @user.lists.count %></p>
       <p><i class="fas fa-comment-dots"></i>コメント数:<%= @user.comments.count %></p>
@@ -30,15 +32,17 @@
     <div class="col-8">
       <div class="form-row mb-3">
         <div class="col">
+          <% if user_signed_in? %>
           <% if @user.id == current_user.id %>
-                <%= form_with model:@newdream,url:dreams_path,method: :post do |f|%>
+                <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
                   <%= f.text_field:content,class:"form-control" %>
                   </div>
                   <div class="col-auto">
                   <%= f.submit class:"form-control text-white btn",style:"background-color:#a1c7ec" %>
                 <% end %>
-              <% end %>
               </div>
+              <% end %>
+              <% end %>
             </div>
       <div class="card">
         <div class="card-body">
@@ -53,6 +57,7 @@
               <%= list.dream.content %>
             </span>
           <% end %>
+          <% if user_signed_in? %>
           <% if @user.id == current_user.id %>
             <span>
               <%= link_to list_path(list),method: :delete do %>
@@ -61,6 +66,7 @@
             </span>
           <% end %>
           </li>
+        <% end %>
         <% end %>
         </div>
     </div>
