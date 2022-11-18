@@ -10,24 +10,26 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="text-secondary" style="background-color:#f5f9f9">
   <header>
-    <nav class="navbar" style="background-color:#20b2aa">
+    <nav class="navbar border-bottom secondary" style="background-color:#ffffff">
       <div class="container">
-        <p><i class="fas fa-home" style="color:white"></i>
-        <%= link_to "TOP",root_path,class:"text-white" %></p>
-        <p><i class="fas fa-star" style="color:white"></i>
-        <%= link_to "みんなのユメ",dreams_path,class:"text-white" %></p>
+        <div class="row justify-content-around">
+        <span><i class="fas fa-home"></i>
+        <%= link_to "TOP",root_path %></span>
+        <span><i class="fas fa-star"></i>
+        <%= link_to "みんなのユメ",dreams_path %></span>
         <% if user_signed_in? %>
-        <p><i class="fas fa-list" style="color:white"></i>
-        <%= link_to "MYLIST",user_path(current_user.id),class:"text-white" %></p>
-        <p><i class="fas fa-sign-out-alt" style="color:white"></i>
-        <%= link_to "ログアウト",destroy_user_session_path,method: :delete,class:"text-white" %></p>
-        <p style="text-white">hello <%= current_user.name %> !</p>
+        <span><i class="fas fa-list"></i>
+        <%= link_to "MYLIST",user_path(current_user.id) %></span>
+        <span><i class="fas fa-sign-out-alt"></i>
+        <%= link_to "ログアウト",destroy_user_session_path,method: :delete %></span>
+        <span>hello <%= current_user.name %> !</span>
         <% else %>
-        <p><%= link_to "signup",new_user_registration_path,class:"text-white" %></p>
+        <span><%= link_to "signup",new_user_registration_path %></span>
         <% end %>
       </div>
+    </div>
     </nev>
   </header>
 
@@ -35,8 +37,10 @@
     <%= yield %>
   </main>
 
-  <footer>
-
+  <footer style="background-color:#40e0d0">
+    <div class="row justify-content-center">
+      <h4 class="text-white">YOUMELIST</h4>
+    </div>
   </footer>
   </body>
 </html>

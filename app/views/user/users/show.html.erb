@@ -1,11 +1,16 @@
-<div class="container text-dark">
+ <div class="container">
+      <div class="row justify-content-center my-3">
+    <div class="col-4">
 
-  <div class="row justify-content-center mt-4">
-    <div class="col-3">
       <div class="card">
         <div class="card-body">
-      <p><%= @user.name %></p>
-      <p><%= @user.introduction %></p>
+          <p><%= @user.name %></p>
+          <p><%= @user.introduction %></p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+
       <% if @user.id == current_user.id %>
       <p><i class="fas fa-heart" style="color:#ff7f7f"></i><%= link_to "comments",favorites_user_path(@user),class:"text-dark" %></p>
       <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id),class:"text-dark" %></p>
@@ -16,28 +21,25 @@
     </div>
     </div>
 
-    <div class="col-7">
+    <div class="col-8">
       <div class="card">
-        <div style="background-color:#afeeee" class="card-header">
-          <div class="row justify-content-between">
-            <p>
-              <span class="h3 px-2 text-dark">LIST</span> by <%= @user.name %>
-            </p>
-            <div class="px-2">
+        <div class="card-body">
+          <div class="card-title border-bottom">
+              <div class="row justify-content-around">
+                <h3>LIST</h3>
               <% if @user.id == current_user.id %>
                 <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
                 <%= f.text_field:content %>
-                <%= f.submit class:"text-white btn",style:"background-color:#ff7f7f" %>
+                <%= f.submit class:"text-white btn btn-sm",style:"background-color:#40e0d0" %>
                 <% end %>
               <% end %>
-            </div>
+              </div>
           </div>
-        </div>
         <ul class="list-group list-group-flush text-center">
         <% @lists.each do |list| %>
           <li class="list-group-item d-flex justify-content-between">
           <%= link_to dream_path(list.dream.id) do %>
-            <span class="text-dark">
+            <span class="text-secondary">
               <%= list.dream.content %>
             </span>
           <% end %>
@@ -50,8 +52,10 @@
           <% end %>
           </li>
         <% end %>
+        </div>
     </div>
     </div>
   </div>
-
+</div>
+</div>
 </div>
