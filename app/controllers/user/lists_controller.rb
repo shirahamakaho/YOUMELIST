@@ -1,6 +1,5 @@
 class User::ListsController < ApplicationController
-  def show
-  end
+  before_action :authenticate_user!
 
   def create
     List.find_or_create_by(user_id:current_user.id,dream_id:list_params[:dream_id])

@@ -1,9 +1,9 @@
 class User::UsersController < ApplicationController
+  before_action :authenticate_user!,except:[:show]
   before_action :set_user
 
   def show
     @newdream = Dream.new
-    @dream = Dream.find(params[:id])
     @lists = @user.lists.all
   end
 
@@ -22,7 +22,7 @@ class User::UsersController < ApplicationController
     favorites = Favorite.where(user_id:@user.id).pluck(:comment_id)
     @favorite_comments = Comment.find(favorites)
   end
-  
+
   def withdrawal
     @user = User.find(params[:id])
     @user.update(is_deleted: true)
@@ -33,7 +33,7 @@ class User::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name,:introduction)
+    params.require(:user).permit(:name,:introduction,:profile_image)
   end
 
   def set_user

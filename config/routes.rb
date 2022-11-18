@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   root 'homes#top'
 
   namespace :admin do
+    resources:dreams,only:[:index,:destroy]
+    resources:comments,only:[:index,:destroy]
+    resources:users,only:[:index,:update]
   end
 
   scope module: :user do

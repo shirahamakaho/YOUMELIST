@@ -1,0 +1,9 @@
+<h1>ユーザー一覧</h1>
+<% @users.each do |user| %>
+<%= user.name %>
+<%= user.is_deleted %>
+<% end %>
+
+<%= link_to "コメント一覧",admin_comments_path %>
+<%= link_to "ユメ一覧",admin_dreams_path %>
+<%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
