@@ -11,33 +11,33 @@
   </head>
 
   <body class="text-secondary" style="background-color:#f5f9f9">
-  <header>
-    <nav class="navbar border-bottom secondary" style="background-color:#ffffff">
-      <div class="container">
-        <div class="row justify-content-around">
-        <span><i class="fas fa-home"></i>
-        <%= link_to "TOP",root_path %></span>
-        <span><i class="fas fa-star"></i>
-        <%= link_to "みんなのユメ",dreams_path %></span>
-        <% if user_signed_in? %>
-        <span><i class="fas fa-list"></i>
-        <%= link_to "MYLIST",user_path(current_user.id) %></span>
-        <span><i class="fas fa-sign-out-alt"></i>
-        <%= link_to "ログアウト",destroy_user_session_path,method: :delete %></span>
-        <span>hello <%= current_user.name %> !</span>
-        <% else %>
-        <span><%= link_to "signup",new_user_registration_path %></span>
-        <% end %>
-      </div>
-    </div>
-    </nev>
-  </header>
+
+    <header>
+      <nav class="navbar border-bottom secondary" style="background-color:#ffffff">
+        <div class="container">
+          <div class="row justify-content-around">
+            <span><i class="fas fa-home"></i>
+            <%= link_to "TOP",root_path %></span>
+            <span><i class="fas fa-star"></i>
+            <%= link_to "みんなのユメ",dreams_path %></span>
+            <% if user_signed_in? %>
+            <span><i class="fas fa-list"></i>
+            <%= link_to "MYLIST",user_path(current_user.id) %></span>
+            <span><i class="fas fa-sign-out-alt"></i>
+            <%= link_to "ログアウト",destroy_user_session_path,method: :delete %></span>
+            <% else %>
+            <span><%= link_to "signup",new_user_registration_path %></span>
+            <% end %>
+          </div>
+        </div>
+      </nev>
+    </header>
 
   <main>
     <%= yield %>
   </main>
 
-  <footer style="background-color:#40e0d0">
+  <footer style="background-color:#a1c7ec">
     <div class="row justify-content-center">
       <h4 class="text-white">YOUMELIST</h4>
     </div>

@@ -1,4 +1,5 @@
 class User::DreamsController < ApplicationController
+  before_action :authenticate_user!,except: [:show, :index]
 
   def index
     if params[:latest]
@@ -17,16 +18,19 @@ class User::DreamsController < ApplicationController
     @dream = Dream.find(params[:id])
     @list = List.new
     @comments = @dream.comments.all
-    @comment = current_user.comments.new
+    @comment = Comment.new
     # @editcomment = Comment.find(params[:id])
   end
 
   def create
-    @dream = Dream.find_or_create_by(content:dream_params[:content])
-    # dream_params に入ってる content と同じ content が Dream テーブルにあるか探す、なければ保存
-    List.find_or_create_by(user_id:current_user.id,dream_id:@dream.id)
-    # current_user_id と @dream の dream_id を List テーブルに保存
-    redirect_to user_path(current_user.id)
+    if @dream = Dream.find_or_create_by(content:dream_params[:content])
+      # dream_params に入ってる content と同じ content が Dream テーブルにあるか探す、なければ保存
+      List.find_or_create_by(user_id:current_user.id,dream_id:@dream.id)
+      # current_user_id と @dream の dream_id を List テーブルに保存
+      redirect_to user_path(current_user.id)
+    else
+      render "show"
+    end
   end
 
   private

@@ -10,13 +10,14 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/YOUME1.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize: "200x200^", gravity: "center", crop: "#{width}x#{height}+0+0").processed
+    profile_image.variant(resize: "#{width}x#{height}^", gravity: "center", crop: "#{width}x#{height}+0+0").processed
   end
 
   has_many :lists
   has_many :dreams,through: :lists
   has_many :comments
   has_many :favorites, dependent: :destroy
+
   validates :email, uniqueness: true
   validates :name, presence: true
 

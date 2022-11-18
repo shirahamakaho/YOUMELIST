@@ -1,20 +1,17 @@
-<div class="row justify-content-center">
-    <!--<img src="../../assets/images/YOUMELIST.png">-->
-    <%= image_tag "YOUMELIST.png",size:"300x120",class:"my-2" %>
-    </div>
+<div class="container-fluid">
+  <div class="row">
 
-    <div class="row justify-content-center">
-      <p class="text-center">
-        「ユメ」を共有しよう
-      </p>
+    <div class="col-6 text-center align-items-center" style="background-color:#a1c7ec">
+      <%= image_tag "YOUMElogo.PNG",width:"70%",height:"70%",class:"my-2" %>
+    </div>
+    <div class="col-6" style="background-color:#ffffff">
+      「ユメ」を共有しよう
       <% if user_signed_in? %>
       <%= link_to "マイページへ",user_path(current_user.id) %>
       <% else %>
-    </div>
-
-  <div class="row justify-content-center">
+      <div class="form-row">
       <%= form_with model:@user,url:user_session_path do |f| %>
-      <div class="field row">
+
         <div class="col-3">
           <%= f.label :email %>
         </div>
@@ -38,17 +35,21 @@
     <% end %>
     <% end %>
     </div>
+    </div>
+
+  </div>
+</div>
 
   <div class="row justify-content-around mt-3">
-    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#afeeee" do %>
+    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
     <i class="fas fa-star h3 mt-2" style="color:white"></i>
     <% end %>
-    <%= link_to new_user_registration_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#afeeee" do %>
+    <%= link_to new_user_registration_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
     <% end %>
-    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#afeeee" do %>
+    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
     <i class="fas fa-star h3 mt-2" style="color:white"></i>
     <% end %>
-    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#afeeee" do %>
+    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
     <i class="fas fa-star h3 mt-2" style="color:white"></i>
     <% end %>
   </div>
@@ -93,7 +94,7 @@
       </div>
     </div>
 
-     <div class="row justify-content-center" style="background-color:#ffffff">
+     <div class="row justify-content-center" style="background-color:#f5fffa">
       <div class="col-5">
         <%= image_tag "YOUME1.jpg",size:"300x200" %>
       </div>
