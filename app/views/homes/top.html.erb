@@ -1,108 +1,81 @@
-<div class="container-fluid">
-  <div class="row">
+<div class="container mb-3">
 
-    <div class="col-6 text-center align-items-center" style="background-color:#a1c7ec">
-      <%= image_tag "YOUMElogo.PNG",width:"70%",height:"70%",class:"my-2" %>
+  <div class="row justify-content-center text-center">
+    <div class="col-md-12 m-4"><%= image_tag"logo-b2.PNG",size:"300x75" %></div>
+    <div class="col-md-12">
+      <p>YOUMELISTは、あなたのやりたいこと 「ユメ」 を<br>みんなと共有できるサービスです。</p>
     </div>
-    <div class="col-6" style="background-color:#ffffff">
-      「ユメ」を共有しよう
+
+    <div class="col-md-7">
       <% if user_signed_in? %>
-      <%= link_to "マイページへ",user_path(current_user.id) %>
+      <%= link_to "マイページへ",user_path(current_user.id),class:"btn text-white",style:"background-color:#67a7cc" %>
       <% else %>
-      <div class="form-row">
-      <%= form_with model:@user,url:user_session_path do |f| %>
-
-        <div class="col-3">
-          <%= f.label :email %>
-        </div>
-        <div class="col-3">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-        </div>
+      <div class="col-md-12">
+        <p>リスト作成や、コメントを残すにはログインが必要です。</p>
+        <%= link_to "ユメを見に行く",dreams_path,class:"btn btn-outline-warning mr-3" %>
+        <%= link_to "新規登録する",dreams_path,class:"btn btn-outline-warning" %>
       </div>
-
-      <div class="field row">
-        <div class="col-3">
-          <%= f.label :password %>
+        <%= form_with model:@user,url:user_session_path do |f| %>
+        <div class="col text-left my-3">
+          <%= f.label :メールアドレス %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control" %>
         </div>
-        <div class="col-3">
-          <%= f.password_field :password, autocomplete: "current-password" %>
+        <div class="col text-left">
+          <%= f.label :パスワード %>
+          <%= f.password_field :password, autocomplete: "current-password",class:"form-control" %>
         </div>
-      </div>
-        <div class="field row">
-          <%= f.submit "Log in" %>
+        <div class="col-auto">
+          <%= f.submit "ログインする",class:"form-control mt-2 btn text-white",style:"background-color:#67a7cc" %>
         </div>
+        <% end %>
+      <% end %>
     </div>
-    <% end %>
-    <% end %>
-    </div>
-    </div>
-
   </div>
 </div>
 
-  <div class="row justify-content-around mt-3">
-    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
-    <i class="fas fa-star h3 mt-2" style="color:white"></i>
-    <% end %>
-    <%= link_to new_user_registration_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
-    <% end %>
-    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
-    <i class="fas fa-star h3 mt-2" style="color:white"></i>
-    <% end %>
-    <%= link_to dreams_path,class:"btn rounded-circle p-0",style:"width:3rem;height:3rem; background-color:#a1c7ec" do %>
-    <i class="fas fa-star h3 mt-2" style="color:white"></i>
-    <% end %>
+<div class="container text-center mt-4">
+
+    <div class="row align-items-center" style="background-color:#ffffff">
+      <div class="col-md-6">
+        <%= image_tag"top1.PNG",class:"card-img" %>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h4 class="border-bottom">リストをつくる</h4>
+          <p>マイページで「ユメ」を入力する事で、<br>あなたのリストに追加されます。<br>
+          この時表示されている数字は、<br>同じ「ユメ」をもつ仲間の数です。</p>
+      </div>
+
+    </div>
+
+    <div class="row align-items-center" style="background-color:#f4f4f4">
+      <div class="col-md-6">
+        <%= image_tag"top2.PNG",class:"card-img" %>
+        </p>
+      </div>
+      <div class="col-md-6">
+        <h4 class="border-bottom">コメントをする</h4>
+          <p>「ユメ」では、進捗共有をしたり、情報交換をしたり。<br>
+          自由にコメントが残せます。<br>おなじ「ユメ」を持つユーザーのリストも<br>
+          ここから見る事ができます。</p>
+        </div>
+
+    </div>
+
+    <div class="row align-items-center" style="background-color:#ffffff">
+      <div class="col-md-6">
+        <%= image_tag"top3.PNG",class:"card-img" %>
+        </p>
+      </div>
+
+      <div class="col-md-6">
+        <h4 class="border-bottom">みんなと共有</h4>
+          <p>「みんなのユメ」から<br>自分のリストに追加することもできます。<br>
+          あなたのいろんな「ユメ」を、<br>どんどんリストにしましょう！
+          </p>
+      </div>
+    </div>
   </div>
 
-    <div class="row justify-content-center mt-3">
-      <h3 style="background-color:#ff7f7f"><span class="text-white">What's YOUMELIST ?</span></h3>
-    </div>
-
-    <div class="row justify-content-center" style="background-color:#ffffff">
-      <div class="col-5">
-        <p class="text-center text-dark">
-          マイページで「ユメ」を入力する事で、あなたのリストに追加されます。<br>
-          この時表示されている数字は、同じ「ユメ」をもつ仲間の数です。
-        </p>
-      </div>
-      <div class="col-5">
-        <%= image_tag "YOUME1.jpg",size:"300x200" %>
-      </div>
-    </div>
-
-    <div class="row justify-content-center" style="background-color:#ffffff">
-      <div class="col-5">
-        <%= image_tag "YOUME1.jpg",size:"300x200" %>
-      </div>
-      <div class="col-5">
-        <p class="text-center text-dark">
-          「ユメ」では、進捗を報告したり、情報を共有したり。<br>
-          自由にコメントを残す事ができます。
-        </p>
-      </div>
-    </div>
-
-    <div class="row justify-content-center" style="background-color:#ffffff">
-      <div class="col-5">
-        <p class="text-center text-dark">
-          このマークのついたコメントは、その「ユメ」を持っている人のコメントです。<br>
-          コメントにはいいねをつける事ができます<i class="far fa-heart"></i>
-        </p>
-      </div>
-      <div class="col-5">
-        <%= image_tag "YOUME1.jpg",size:"300x200" %>
-      </div>
-    </div>
-
-     <div class="row justify-content-center" style="background-color:#f5fffa">
-      <div class="col-5">
-        <%= image_tag "YOUME1.jpg",size:"300x200" %>
-      </div>
-      <div class="col-5">
-        <p class="text-center text-dark">
-          <i class="far fa-user"></i>は仲間の数、
-          <i class="far fa-comment-dots"></i>はコメントの数を表わしています。<br>
-          仲間が0人になったユメは自動的に無くなります。
-        </p>
-      </div>
-    </div>
+  </div>
