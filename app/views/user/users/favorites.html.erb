@@ -1,5 +1,65 @@
-<h1>Favorite Comments</h1>
-<% @favorite_comments.each do |comment| %>
-<%= comment.comment %>
-on <%= comment.dream.content %><br>
-<% end %>
+  <div class="container">
+  <div class="row justify-content-center my-3">
+
+    <div class="col-4">
+      <div class="card mb-3">
+        <div class="card-header" style="background-color:#67a7cc">
+          <span class="text-white h4">Profile.</span>
+        </div>
+        <div class="card-body">
+            <%= image_tag @user.get_profile_image(100,100),class:"rounded-circle"; %>
+            <p><%= @user.name %></p>
+            <p><%= @user.introduction %></p>
+        </div>
+      </div>
+
+      <div class="card border-0">
+        <div class="card-body">
+        <% if user_signed_in? && @user.id == current_user.id %>
+          <p><i class="fas fa-heart" style="color:#ff7f7f"></i><%= link_to "comments",favorites_user_path(@user),class:"text-dark" %></p>
+          <p><i class="fas fa-cog"></i><%= link_to "edit profile",edit_user_path(@user.id),class:"text-secondary" %></p>
+        <% end %>
+        <p><i class="fas fa-star"></i>ユメ:<%= @user.lists.count %></p>
+        <p><i class="fas fa-comment-dots"></i>コメント数:<%= @user.comments.count %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <% if user_signed_in? && @user.id == current_user.id %>
+      <div class="form-row mb-3">
+        <div class="col">
+          <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
+          <%= f.text_field:content,class:"form-control" %>
+        </div>
+        <div class="col-auto">
+          <%= f.submit "追加する",class:"form-control text-white btn",style:"background-color:#67a7cc" %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+
+      <div class="card">
+        <div class="card-body">
+
+          <div class="card-title border-bottom pl-3">
+            <h4>いいねしたコメント</h4>
+          </div>
+
+          <ul class="list-group list-group-flush text-center">
+            <% @favorite_comments.each do |comment| %>
+            <li class="list-group-item d-flex justify-content-between">
+              <!--%= link_to dream_path(list.dream.id) do %>-->
+                <span class="text-dark"><%= comment.comment %>on <%= comment.dream.content %>/span>
+
+              <!--% end %>-->
+              <!--% if user_signed_in? && @user.id == current_user.id %>-->
+                <!--%= link_to list_path(list),method: :delete do %>-->
+                  <!--<span style="color:#67a7cc"><i class="fas fa-times"></i></span>-->
+                <!--% end %>-->
+              <!--% end %>-->
+            </li>
+            <% end %>
+        </div>
+      </div>
+    </div>

@@ -10,36 +10,43 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="text-secondary" style="background-color:#f5f9f9">
+  <body class="text-dark" style="background-color:#f5f9f9">
 
     <header>
-      <nav class="navbar border-bottom secondary" style="background-color:#ffffff">
-        <div class="container">
-          <div class="row justify-content-around">
-            <span><i class="fas fa-home"></i>
-            <%= link_to "TOP",root_path %></span>
-            <span><i class="fas fa-star"></i>
-            <%= link_to "みんなのユメ",dreams_path %></span>
-            <% if user_signed_in? %>
-            <span><i class="fas fa-list"></i>
-            <%= link_to "MYLIST",user_path(current_user.id) %></span>
-            <span><i class="fas fa-sign-out-alt"></i>
-            <%= link_to "ログアウト",destroy_user_session_path,method: :delete %></span>
-            <% else %>
-            <span><%= link_to "signup",new_user_registration_path %></span>
-            <% end %>
+      <nav class="navbar border-bottom" style="background-color:#67a7cc">
+        <div class="container justify-content-center">
+          <div class="row">
+            <div class="col"><%= image_tag"logo-w.PNG",size:"100x25" %>
+              <%= link_to root_path do %>
+              <i class="fas fa-home mr-1" style="color:#ffffff"></i>
+              <% end %>
+              <%= link_to dreams_path do %>
+              <i class="fas fa-star mr-1" style="color:#ffffff"></i>
+              <% end %>
+              <% if user_signed_in? %>
+                <%= link_to user_path(current_user.id) do %>
+                <i class="fas fa-list-alt mr-1" style="color:#ffffff"></i>
+                <% end %>
+                <%= link_to destroy_user_session_path,method: :delete do %>
+                <i class="fas fa-sign-out-alt mr-1" style="color:#ffffff"></i>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </nev>
+      </nav>
     </header>
 
   <main>
     <%= yield %>
   </main>
 
-  <footer style="background-color:#a1c7ec">
+  <footer class="text-white p-5" style="background-color:#67a7cc">
     <div class="row justify-content-center">
-      <h4 class="text-white">YOUMELIST</h4>
+      <h4>YOUMELIST</h4>
+    </div>
+    <div class="row justify-content-center mt-2">
+      <p>イラスト：Loose Drawing</p>
     </div>
   </footer>
   </body>

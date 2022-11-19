@@ -19,6 +19,7 @@ class User::UsersController < ApplicationController
   end
 
   def favorites
+    @newdream = Dream.new
     favorites = Favorite.where(user_id:@user.id).pluck(:comment_id)
     @favorite_comments = Comment.find(favorites)
   end

@@ -1,99 +1,99 @@
-    <div class="container">
-      <div class="row">
+<div class="container">
+  <div class="row my-3">
 
-        <div class="col-4">
-          <div class="card">
-
-            <div class="card-header" style="background-color:#a1c7ec">
-              <h4 class="text-white"><i class="fas fa-star"></i><%= @dream.content %></h4>
-            </div>
-            <div class="card-body">
-              <div class="card-title">
-                <p>最新コメント何日前</p>
-              </div>
-              <h1><i class="fas fa-user"></i><%= @dream.users.count %></h1>
-              <h1><i class="fas fa-comments"></i><%= @dream.comments.count %></h1>
-              </div>
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-header" style="background-color:#67a7cc">
+          <span class="text-white h4"><i class="fas fa-star" style="color:#ffffff"></i> Dream</span>
+        </div>
+        <div class="card-body">
+          <p>仲間の数 : <i class="fas fa-user mr-1"></i><%= @dream.users.count %></p>
+          <p>コメントの数 : <i class="fas fa-comments mr-1"></i><%= @dream.comments.count %></p>
+          <% if user_signed_in? %>
+            <%= form_with model:@list,url:lists_path,method: :post do |f| %>
+            <%= f.hidden_field:dream_id,:value => @dream.id %>
+            <%= f.hidden_field:user_id,:value => current_user.id %>
+              <%= button_tag type: "submit",class:"btn btn-sm text-white",style:"background-color:#67a7cc" do %>
+               <i class="fas fa-plus"></i> リストに入れる
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
       </div>
 
-      <div class="card">
+      <div class="card border-0 mb-3">
         <div class="card-body">
           <div class="card-title border-bottom">
-            <h5><i class="fas fa-user"></i>なかま</h5>
+            <h6>このユメを持っているユーザー</h6>
           </div>
-      <% @dream.users.each do |user| %>
-      <%= image_tag user.get_profile_image(50,50),class:"mt-3 rounded-circle"; %>
-      <%= link_to user_path(user.id) do %>
-      <%= user.name %>
-      <% end %>
-      <% end %>
-      <%= link_to "もっと見る",dreams_path %>
-      </div>
+          <% @dream.users.each do |user| %>
+            <%= image_tag user.get_profile_image(50,50),class:"mt-3 rounded-circle"; %>
+            <%= link_to user_path(user.id) do %>
+            <%= user.name %>
+            <% end %>
+          <% end %>
+          <%= link_to "もっと見る",dreams_path %>
+        </div>
       </div>
     </div>
 
-    <div class="col-8">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-body">
 
-        <p><i class="fas fa-pen"></i>コメントを残す</p>
-        <div class="row align-items-center">
-          <div class="col auto">
+          <div class="card-title border-bottom pl-3">
+            <h5><i class="fas fa-list-alt" style="color:#ffdc00"></i> <%= @dream.content %></h5>
+          </div>
+
+          <p><i class="fas fa-pen"></i> コメントを残す</p>
+          <div class="col">
             <%= form_with(model:[@dream,@comment], method: :post) do |f| %>
             <%= f.text_area :comment,class:"form-control" %>
           </div>
-        </div>
           <%= f.hidden_field :dream_id, value: @dream.id %>
-        <div class="col auto mt-2">
-          <%= f.submit "コメントする",class:"form-control btn text-white",style:"background-color:#ff7f7f" %>
-        </div>
-        <% end %>
-      <p><i class="fas fa-comments mt-4"></i>みんなのコメント</p>
-      <% @comments.each do |comment| %>
+          <div class="col mt-2">
+            <%= f.submit "コメントする",class:"form-control btn text-white",style:"background-color:#67a7cc" %>
+          </div>
+          <% end %>
 
-      <div class="card mt-2">
-        <div class="card-body d-flex align-items-center">
-          <div class="card-title">
-            <%= image_tag comment.user.get_profile_image(40,40),class:"mt-3 rounded-circle"; %>
-            <%= comment.user.name %>
-            <%= comment.created_at %>
+          <p><i class="fas fa-comments mt-4"></i> みんなのコメント</p>
+          <% @comments.each do |comment| %>
+          <div class="card mt-2">
+              <div class="card-title mx-3">
+                <%= image_tag comment.user.get_profile_image(30,30),class:"mt-3 rounded-circle"; %>
+                <span><%= comment.user.name %></span>
+              </div>
+              <div class="card-text border-bottom mx-3">
+                <%= comment.comment %>
+              </div>
+              <div class="card-text">
+                <div class="row justify-content-between align-items-center">
+                  <div class="mx-5">
+                  <% if user_signed_in? && comment.favorited?(current_user) %>
+                    <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :delete do %>
+                    <i class="fas fa-heart" style="color:#ff7f7f"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :post do %>
+                    <i class="far fa-heart" style="color:#ff7f7f"></i>
+                    <% end %>
+                  <% end %>
+                  <span><%= comment.favorites.count %></span>
+                  </div>
+                  <div class="mx-5">
+                  <% if user_signed_in? && comment.user.id == current_user.id %>
+                    <%= link_to dream_comment_path(@dream,comment.id),method: :delete do %>
+                      <i class="fas fa-times" style="color:#67a7cc"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+                </div>
+
+              </div>
           </div>
-          <div class="card-text">
-            <%= comment.comment %>
-            </div>
-          </div>
+          <% end %>
         </div>
-      <div style="background-color:#afeeee" class="card-footer">
-        <% if user_signed_in? %>
-          <% if comment.favorited?(current_user) %>
-            <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :delete do %>
-            <span style="color:#ff7f7f"><i class="fas fa-heart"></i></span>
-            <% end %>
-          <% else %>
-            <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :post do %>
-            <span style="color:#ff7f7f"><i class="far fa-heart"></i></span>
-            <% end %>
-          <% end %>
-          <%= comment.favorites.count %>件のイイネ
-          <% if comment.user.id == current_user.id %>
-          <!--%= link_to "edit",dream_path(@dream,comment.id) %>-->
-          <!--comment.idを渡してコメントフォームに編集するコメントを表示-->
-          <%= link_to "edit",dream_path(@dream,comment.id) %>
-          <%= link_to "delete",dream_comment_path(@dream,comment.id),method: :delete %><br>
-          <% end %>
-          <% else %>
-          <%= link_to dream_comment_favorites_path(@dream,comment.id),method: :post do %>
-          <span style="color:#ff7f7f"><i class="far fa-heart"></i></span>
-            <% end %>
-          <%= comment.favorites.count %>件のイイネ
-        <% end %>
       </div>
-    <% end %>
     </div>
   </div>
-  </div>
-  </div>
-  </div>
-
-</div>
 </div>
