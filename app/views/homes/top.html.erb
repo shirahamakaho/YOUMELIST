@@ -10,11 +10,13 @@
       <% if user_signed_in? %>
       <%= link_to "マイページへ",user_path(current_user.id),class:"btn text-white",style:"background-color:#67a7cc" %>
       <% else %>
+    </div>
       <div class="col-md-12">
         <p>リスト作成や、コメントを残すにはログインが必要です。</p>
         <%= link_to "ユメを見に行く",dreams_path,class:"btn btn-outline-warning mr-3" %>
-        <%= link_to "新規登録する",dreams_path,class:"btn btn-outline-warning" %>
+        <%= link_to "新規登録する",new_user_registration_path,class:"btn btn-outline-warning" %>
       </div>
+      <div class="col-md-5">
         <%= form_with model:@user,url:user_session_path do |f| %>
         <div class="col text-left my-3">
           <%= f.label :メールアドレス %>
@@ -24,11 +26,12 @@
           <%= f.label :パスワード %>
           <%= f.password_field :password, autocomplete: "current-password",class:"form-control" %>
         </div>
-        <div class="col-auto">
+        <div class="col">
           <%= f.submit "ログインする",class:"form-control mt-2 btn text-white",style:"background-color:#67a7cc" %>
         </div>
         <% end %>
       <% end %>
+      </div>
     </div>
   </div>
 </div>
@@ -77,5 +80,4 @@
       </div>
     </div>
   </div>
-
-  </div>
+</div>
