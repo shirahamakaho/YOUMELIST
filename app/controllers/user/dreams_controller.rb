@@ -9,7 +9,7 @@ class User::DreamsController < ApplicationController
     else
       @dreams = Dream.all.order("created_at DESC")
     end
-    @latestdream = Dream.limit(3).order("created_at DESC")
+    @latestdream = List.limit(3).order("updated_at DESC")
     @latestcomment = Comment.limit(5).order("created_at DESC")
     @list = List.new
   end

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
 
-    <div class="col-md-12">
+    <div class="col-lg-12 col-md-12">
       <div class="card border-0" style="background-color:#ffffff">
         <div class="card-header border-0"></div>
         <div class="card-body">
@@ -13,18 +13,19 @@
 
           <div class="card-deck">
             <% @latestdream.each do |dream| %>
-            <div class="col-md-4">
-              <%= link_to dream_path(dream.id) do %>
+            <div class="col-lg-4">
+              <%= link_to dream_path(dream.dream.id) do %>
               <div class="card text-center" style="height:7rem;">
                 <div class="card-body">
                   <div class="card-title text-dark text-truncate">
-                    <%= dream.content %>
+                    <%= dream.dream.content %>
                   </div>
                   <div class="card-text">
                     <div class="row text-center">
                       <div class="col aline-items-center">
-                        <i class="fas fa-user text-dark"></i><span class="ml-1 text-dark"><%= dream.users.count %></span>
-                        <i class="fas fa-comments text-dark"></i><span class="ml-1 text-dark"><%= dream.comments.count %></span>
+                        <i class="fas fa-user text-dark"></i><span class="ml-1 text-dark"><%= dream.dream.users.count %></span>
+                        <i class="fas fa-comments text-dark"></i><span class="ml-1 text-dark"><%= dream.dream.comments.count %></span>
+                        <span class="text-muted">(<%= time_ago_in_words(dream.updated_at) %>前)</span>
                       </div>
                     </div>
                   </div>
@@ -39,12 +40,10 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="container">
   <div class="row my-3">
 
-    <div class="col-md-4 justify-content-center mb-3">
+    <div class="col-lg-4 col-md-12 justify-content-center mb-3">
       <div class="form-row">
         <div class="col">
           <%= form_with url:search_path,method: :get do |f| %>
@@ -74,7 +73,7 @@
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-lg-8 col-md-12">
       <div class="card border-0">
         <div class="card-header border-0" style="background-color:#67a7cc">
           <h4 class="text-white"><i class="fas fa-list-alt" style="color:#ffffff"></i> Dreams</h4>
@@ -83,43 +82,33 @@
           <%= link_to "新しい順",dreams_path(latest: "true"),class:"btn btn-sm btn-outline-secondary" %>
           <%= link_to "古い順",dreams_path(old: "true"),class:"btn btn-sm btn-outline-secondary" %>
 
-          <% @dreams.each do |dream| %>
-          <% if dream.users.count > 0 %>
-          <div class="card mt-3">
-            <div class="card-body">
-              <div class="card-text">
-
-                <div class="row justify-content-between">
-                  <div class="col-auto">
-                    <%= link_to dream_path(dream.id) do %>
-                    <div class="text-dark text-truncate"><%= dream.content %></div>
-                    <% end %>
-                  </div>
-                  <div class="row mx-2">
-                    <div class="col-auto">
-                      <i class="fas fa-user mr-1"></i><%= dream.users.count %>
-                      <i class="fas fa-comments mx-1"></i><%= dream.comments.count %>
-                    </div>
-                    <% if user_signed_in? %>
-                     <div class="col-auto">
-                      <%= form_with model:@list,url:lists_path,method: :post do |f| %>
-                        <%= f.hidden_field:dream_id,:value => dream.id %>
-                        <%= f.hidden_field:user_id,:value => current_user.id %>
-                        <%= button_tag type: "submit",class:"btn btn-sm text-white",style:"background-color:#67a7cc" do %>
-                          <span><i class="fas fa-plus"></i></span>
-                        <% end %>
-                      <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-                </div>
-
+          <ul class="list-group list-group-flush text-center">
+            <% @dreams.each do |dream| %>
+            <% if dream.users.count > 0 %>
+            <li class="list-group-item d-flex justify-content-between">
+              <%= link_to dream_path(dream.id) do %>
+              <span class="text-dark"><%= dream.content %></span>
+              <% end %>
+              <div class="row col-auto">
+                <span><i class="fas fa-user mr-1"></i><%= dream.users.count %></span>
+                <span class="mr-1"><i class="fas fa-comments mx-1"></i><%= dream.comments.count %></span>
+                <% if user_signed_in? %>
+                  <%= form_with model:@list,url:lists_path,method: :post do |f| %>
+                  <%= f.hidden_field:dream_id,:value => dream.id %>
+                  <%= f.hidden_field:user_id,:value => current_user.id %>
+                  <%= button_tag type: "submit",class:"btn btn-sm text-white",style:"background-color:#67a7cc" do %>
+                    <span><i class="fas fa-plus"></i></span>
+                  <% end %>
+                  <% end %>
+                <% end %>
               </div>
-            </div>
-          </div>
-          <% end %>
-          <% end %>
+              </li>
+            <% end %>
+            <% end %>
+          </ul>
 
         </div>
       </div>
     </div>
+     </div>
+  </div>
