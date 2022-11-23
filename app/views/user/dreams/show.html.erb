@@ -66,14 +66,14 @@
           </div>
 
           <p><i class="fas fa-pen"></i> コメントを残す</p>
-          <div class="col">
-            <%= form_with(model:[@dream,@comment]) do |f| %>
-            <%= f.text_area :comment,class:"form-control" %>
-          </div>
-          <%= f.hidden_field :dream_id, value: @dream.id %>
-          <div class="col mt-2">
-            <%= f.submit class:"form-control btn text-white",style:"background-color:#67a7cc" %>
-          </div>
+          <%= form_with(model:[@dream,@comment]) do |f| %>
+            <div class="col">
+              <%= f.text_area :comment,class:"form-control" %>
+            </div>
+            <%= f.hidden_field :dream_id, value: @dream.id %>
+            <div class="col mt-2">
+              <%= f.submit class:"form-control btn text-white",style:"background-color:#67a7cc" %>
+            </div>
           <% end %>
 
           <p><i class="fas fa-comments mt-4"></i> みんなのコメント</p>
@@ -98,7 +98,8 @@
                     <i class="far fa-heart" style="color:#ff7f7f"></i>
                     <% end %>
                   <% end %>
-                  <span><%= comment.favorites.count %></span>
+                  <span class="mr-4"><%= comment.favorites.count %></span>
+                  <span><i class="fas fa-history mr-1"></i><%= comment.updated_at.to_s(:datetime_jp) %></span>
                   </div>
                   <div class="mx-5">
                   <% if user_signed_in? && comment.user.id == current_user.id %>

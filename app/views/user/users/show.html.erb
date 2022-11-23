@@ -40,16 +40,16 @@
 
     <div class="col-lg-8 col-md-12">
       <% if user_signed_in? && @user.id == current_user.id %>
+      <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
       <div class="form-row mb-3">
         <div class="col">
-          <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
           <%= f.text_field:content,class:"form-control" %>
         </div>
         <div class="col-auto">
           <%= f.submit "追加する",class:"form-control text-white btn",style:"background-color:#67a7cc" %>
-          <% end %>
         </div>
       </div>
+      <% end %>
       <% end %>
 
       <div class="card">
