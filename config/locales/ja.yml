@@ -1,4 +1,10 @@
 ja:
+
+  helpers:
+    submit:
+      create: "コメントする"
+      update: "編集を保存する"
+
   datetime:
     distance_in_words:
       about_x_hours:

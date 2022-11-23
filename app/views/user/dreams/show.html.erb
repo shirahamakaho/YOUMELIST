@@ -65,12 +65,12 @@
 
           <p><i class="fas fa-pen"></i> コメントを残す</p>
           <div class="col">
-            <%= form_with(model:[@dream,@comment], method: :post) do |f| %>
+            <%= form_with(model:[@dream,@comment]) do |f| %>
             <%= f.text_area :comment,class:"form-control" %>
           </div>
           <%= f.hidden_field :dream_id, value: @dream.id %>
           <div class="col mt-2">
-            <%= f.submit "コメントする",class:"form-control btn text-white",style:"background-color:#67a7cc" %>
+            <%= f.submit class:"form-control btn text-white",style:"background-color:#67a7cc" %>
           </div>
           <% end %>
 
@@ -100,8 +100,11 @@
                   </div>
                   <div class="mx-5">
                   <% if user_signed_in? && comment.user.id == current_user.id %>
+                    <%= link_to edit_dream_comment_path(@dream,comment.id) do %>
+                      <i class="fas fa-edit" style="color:#67a7cc"></i>
+                    <% end %>
                     <%= link_to dream_comment_path(@dream,comment.id),method: :delete do %>
-                      <i class="fas fa-times" style="color:#67a7cc"></i>
+                      <i class="fas fa-times ml-3" style="color:#67a7cc"></i>
                     <% end %>
                   <% end %>
                 </div>

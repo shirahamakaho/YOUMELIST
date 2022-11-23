@@ -20,7 +20,6 @@ class User::DreamsController < ApplicationController
     @list = List.find_by(user_id:current_user.id,dream_id:@dream.id)
     @comments = @dream.comments.all.order("created_at DESC")
     @comment = Comment.new
-    # @editcomment = Comment.find(params[:id])
   end
 
   def create

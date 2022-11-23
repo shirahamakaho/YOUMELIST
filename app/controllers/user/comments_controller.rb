@@ -11,9 +11,18 @@ class User::CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Commen.find(params[:id])
+    @dream = Dream.find(params[:dream_id])
+    @newlist = List.new
+    @list = List.find_by(user_id:current_user.id,dream_id:@dream.id)
+    @comments = @dream.comments.all.order("created_at DESC")
+    @comment = Comment.find(params[:id])
+    render template:"user/dreams/show"
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
     @comment.update(comment_params)
-    redirect_back(fallback_location: root_path)
+    redirect_to dream_path(params[:dream_id])
   end
 
   def destroy
