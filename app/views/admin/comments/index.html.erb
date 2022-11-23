@@ -1,9 +1,35 @@
-<h1>コメント一覧</h1>
-<% @comments.each do |comment| %>
-<%= comment.comment %>
-<%= comment.user.name %>
-<% end %>
+<div class="container p-2">
+  <h3>コメント一覧</h3>
+  <div class="row justify-content-center">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">コメント内容</th>
+          <th scope="col">ユメ</th>
+          <th scope="col">ユーザー</th>
+          <th scope="col">×</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.comment %></td>
+          <td><%= comment.dream.content %></td>
+          <td><%= comment.user.name %></td>
+          <td><%= link_to "×",admin_comment_path(comment.id),method: :delete %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= link_to "ユーザー一覧",admin_users_path %>
-<%= link_to "ユメ一覧",admin_dreams_path %>
-<%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
+  <div class="row justify-content-center">
+    <p>
+      <%= link_to "ユーザー一覧",admin_users_path %>
+       |
+      <%= link_to "ユメ一覧",admin_dreams_path %>
+       |
+      <%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
+    </p>
+  </div>
+</div>

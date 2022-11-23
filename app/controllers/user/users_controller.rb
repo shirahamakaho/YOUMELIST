@@ -14,7 +14,7 @@ class User::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
-      render 'edit',notice:"名前を入力してください"
+      render 'edit'
     end
   end
 

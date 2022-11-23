@@ -1,9 +1,39 @@
-<h1>ユーザー一覧</h1>
-<% @users.each do |user| %>
-<%= user.name %>
-<%= user.is_deleted %>
-<% end %>
+<div class="container p-2">
+  <h3>ユーザー一覧</h3>
+  <div class="row justify-content-center">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ユーザー名</th>
+          <th scope="col">メールアドレス</th>
+          <th scope="col">状態</th>
+          <th scope="col">×</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.is_deleted %></td>
+          <% if user.is_deleted == true %>
+          <td><%= link_to "有効にする",admin_user_path(user.id,user:{is_deleted: false}),method: :patch %></td>
+          <% else %>
+          <td><%= link_to "停止する",admin_user_path(user.id,user:{is_deleted: true}),method: :patch %></td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= link_to "コメント一覧",admin_comments_path %>
-<%= link_to "ユメ一覧",admin_dreams_path %>
-<%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
+  <div class="row justify-content-center">
+    <p>
+      <%= link_to "ユメ一覧",admin_dreams_path %>
+       |
+      <%= link_to "コメント一覧",admin_comments_path %>
+       |
+      <%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
+    </p>
+  </div>
+</div>

@@ -12,7 +12,8 @@
             <p>コメントの数 : <i class="fas fa-comments mr-1"></i><%= @dream.comments.count %></p>
           </div>
 
-            <% if user_signed_in? && @dream.list_in?(current_user) %>
+            <% if user_signed_in? %>
+              <% if @dream.list_in?(current_user) %>
               <div class="card-text border-top">
                 <div class="mt-3">
                   <span class="h4">Memo</span><span class="text-muted"> ※公開されません</span>
@@ -23,11 +24,11 @@
                 </div>
                 <div class="border-top mt-3 text-right">
                   <%= link_to list_path(@list),method: :delete do %>
-                    <span class="text-muted">リストから外す</span> <i class="fas fa-times" style="color:#67a7cc"></i>
+                  <span class="text-muted">リストから外す</span> <i class="fas fa-times" style="color:#67a7cc"></i>
                   <% end %>
                 </div>
               </div>
-            <% else %>
+              <% else %>
               <%= form_with model:@newlist,url:lists_path,method: :post do |f| %>
                 <%= f.hidden_field:dream_id,:value => @dream.id %>
                 <%= f.hidden_field:user_id,:value => current_user.id %>
@@ -35,6 +36,7 @@
                    <i class="fas fa-plus"></i> リストに入れる
                   <% end %>
                 <% end %>
+              <% end %>
             <% end %>
         </div>
       </div>
