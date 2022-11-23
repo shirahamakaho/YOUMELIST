@@ -7,17 +7,35 @@
           <span class="text-white h4"><i class="fas fa-star" style="color:#ffffff"></i> Dream</span>
         </div>
         <div class="card-body">
-          <p>仲間の数 : <i class="fas fa-user mr-1"></i><%= @dream.users.count %></p>
-          <p>コメントの数 : <i class="fas fa-comments mr-1"></i><%= @dream.comments.count %></p>
-          <% if user_signed_in? %>
-            <%= form_with model:@list,url:lists_path,method: :post do |f| %>
-            <%= f.hidden_field:dream_id,:value => @dream.id %>
-            <%= f.hidden_field:user_id,:value => current_user.id %>
-              <%= button_tag type: "submit",class:"btn btn-sm text-white",style:"background-color:#67a7cc" do %>
-               <i class="fas fa-plus"></i> リストに入れる
-              <% end %>
+          <div class="card-title">
+            <p>ユーザーの数 : <i class="fas fa-user mr-1"></i><%= @dream.users.count %></p>
+            <p>コメントの数 : <i class="fas fa-comments mr-1"></i><%= @dream.comments.count %></p>
+          </div>
+
+            <% if user_signed_in? && @dream.list_in?(current_user) %>
+              <div class="card-text border-top">
+                <div class="mt-3">
+                  <span class="h4">Memo</span><span class="text-muted"> ※公開されません</span>
+                  <%= form_with model:@list,url:list_path(@list.id),method: :patch do |f| %>
+                  <%= f.text_area:memo,class:"form-control",style:"height:5rem;" %>
+                  <%= f.submit "メモを保存",class:"btn btn-sm text-white mt-2",style:"background-color:#67a7cc" %>
+                  <% end %>
+                </div>
+                <div class="border-top mt-3 text-right">
+                  <%= link_to list_path(@list),method: :delete do %>
+                    <span class="text-muted">リストから外す</span> <i class="fas fa-times" style="color:#67a7cc"></i>
+                  <% end %>
+                </div>
+              </div>
+            <% else %>
+              <%= form_with model:@newlist,url:lists_path,method: :post do |f| %>
+                <%= f.hidden_field:dream_id,:value => @dream.id %>
+                <%= f.hidden_field:user_id,:value => current_user.id %>
+                  <%= button_tag type: "submit",class:"btn btn-sm text-white mb-3",style:"background-color:#67a7cc" do %>
+                   <i class="fas fa-plus"></i> リストに入れる
+                  <% end %>
+                <% end %>
             <% end %>
-          <% end %>
         </div>
       </div>
 
@@ -26,10 +44,10 @@
           <div class="card-title border-bottom">
             <h6>このユメを持っているユーザー</h6>
           </div>
-          <% @dream.users.each do |user| %>
+          <% @dream.users.first(5).each do |user| %>
             <%= image_tag user.get_profile_image(50,50),class:"mt-3 rounded-circle"; %>
             <%= link_to user_path(user.id) do %>
-            <%= user.name %>
+            <%= user.name %><br>
             <% end %>
           <% end %>
           <%= link_to "もっと見る",dreams_path %>

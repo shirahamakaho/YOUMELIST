@@ -6,6 +6,12 @@ class User::ListsController < ApplicationController
     redirect_to user_path(current_user.id)
   end
 
+  def update
+    @list = List.find(params[:id])
+    @list.update(list_params)
+    redirect_back(fallback_location: root_path)
+  end
+
   def destroy
     @list = List.find(params[:id])
     @list.delete

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
         get :favorites
       end
     end
-    resources:lists,only:[:create,:destroy]
+    resources:lists,only:[:create,:update,:destroy]
     get "search" => "searches#search"# 検索用
     get "/users/:id/unsubscribe" => "users#unsubscribe",as: 'unsubscribe'
     patch "/users/:id/withdrawal" => "users#withdrawal",as: 'withdrawal'

@@ -14,27 +14,26 @@
           <div class="card-deck">
             <% @latestdream.each do |dream| %>
             <div class="col-md-4">
-              <div class="card text-center">
+              <%= link_to dream_path(dream.id) do %>
+              <div class="card text-center" style="height:7rem;">
                 <div class="card-body">
-                  <div class="card-title">
-                    <%= dream.content.truncate(13) %>
+                  <div class="card-title text-dark text-truncate">
+                    <%= dream.content %>
                   </div>
                   <div class="card-text">
                     <div class="row text-center">
                       <div class="col aline-items-center">
-                      <i class="fas fa-user"></i><span class="ml-1"><%= dream.users.count %></span>
-                      <i class="fas fa-comments"></i><span class="ml-1"><%= dream.comments.count %></span>
-                      <span>
-                        <%= link_to "見に行く",dream_path(dream.id),class:"mt-2 btn btn-sm text-white",style:"background-color:#67a7cc" %>
-                      </span>
+                        <i class="fas fa-user text-dark"></i><span class="ml-1 text-dark"><%= dream.users.count %></span>
+                        <i class="fas fa-comments text-dark"></i><span class="ml-1 text-dark"><%= dream.comments.count %></span>
+                      </div>
                     </div>
                   </div>
                 </div>
-                </div>
               </div>
+              <% end %>
             </div>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
 
         </div>
       </div>
@@ -66,10 +65,10 @@
           <h6>最近コメントが届いたユメ</h6>
           </div>
           <% @latestcomment.each do |comment| %>
-          <i class="fas fa-comment-dots"></i>
           <%= link_to dream_path(comment.dream.id) do %>
-          <%= comment.dream.content %><br>
+          <div class="text-truncate text-dark"><i class="fas fa-comment-dots"></i><%= comment.dream.content %></div>
           <% end %>
+          <span class="text-muted">(<%= time_ago_in_words(comment.created_at) %>前)</span><br>
           <% end %>
         </div>
       </div>
@@ -90,12 +89,13 @@
             <div class="card-body">
               <div class="card-text">
 
-                <div class="row justify-content-between mx-3">
-                  <%= link_to dream_path(dream.id) do %>
-                  <span class="text-dark"><%= dream.content.truncate(13) %></span>
-                  <% end %>
-
-                  <div class="row align-items-center">
+                <div class="row justify-content-between">
+                  <div class="col-auto">
+                    <%= link_to dream_path(dream.id) do %>
+                    <div class="text-dark text-truncate"><%= dream.content %></div>
+                    <% end %>
+                  </div>
+                  <div class="row mx-2">
                     <div class="col-auto">
                       <i class="fas fa-user mr-1"></i><%= dream.users.count %>
                       <i class="fas fa-comments mx-1"></i><%= dream.comments.count %>

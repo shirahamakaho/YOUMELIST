@@ -7,7 +7,7 @@ class User::DreamsController < ApplicationController
     elsif params[:old]
       @dreams = Dream.old
     else
-      @dreams = Dream.all
+      @dreams = Dream.all.order("created_at DESC")
     end
     @latestdream = Dream.limit(3).order("created_at DESC")
     @latestcomment = Comment.limit(5).order("created_at DESC")
@@ -16,8 +16,9 @@ class User::DreamsController < ApplicationController
 
   def show
     @dream = Dream.find(params[:id])
-    @list = List.new
-    @comments = @dream.comments.all
+    @newlist = List.new
+    @list = List.find_by(user_id:current_user.id,dream_id:@dream.id)
+    @comments = @dream.comments.all.order("created_at DESC")
     @comment = Comment.new
     # @editcomment = Comment.find(params[:id])
   end

@@ -6,6 +6,6 @@ class Comment < ApplicationRecord
 
   def favorited?(user)
     favorites.where(user_id: user.id).exists?
-    # current_userがfavoriteしてる？
+    # userがfavoriteしてる？
   end
 end

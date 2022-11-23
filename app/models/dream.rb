@@ -4,6 +4,10 @@ class Dream < ApplicationRecord
   has_many :comments,dependent: :destroy
   validates :content, presence: true,on: :create
 
+  def list_in?(user)
+    lists.where(user_id: user.id).exists?
+  end
+
   def self.looks(search,word)
     search = "pertial_match"
     @dream = Dream.where("content LIKE?","%#{word}%")
