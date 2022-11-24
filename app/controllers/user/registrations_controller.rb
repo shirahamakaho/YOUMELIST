@@ -2,6 +2,10 @@
 
 class User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters
+
+  def after_sign_up_path_for(resource)
+    user_path(@user.id)
+  end
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up

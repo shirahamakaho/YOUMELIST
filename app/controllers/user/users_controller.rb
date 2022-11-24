@@ -24,10 +24,9 @@ class User::UsersController < ApplicationController
     @favorite_comments = Comment.find(favorites)
   end
 
-  def withdrawal
+  def destroy
     @user = User.find(params[:id])
-    @user.update(is_deleted: true)
-    reset_session
+    @user.destroy
     redirect_to root_path
   end
 

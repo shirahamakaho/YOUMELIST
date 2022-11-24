@@ -17,18 +17,18 @@
         <div class="container justify-content-center">
           <div class="row">
             <div class="col"><%= image_tag"logo-w.PNG",size:"100x25" %>
-              <%= link_to root_path do %>
-              <i class="fas fa-home mr-1" style="color:#ffffff"></i>
-              <% end %>
-              <%= link_to dreams_path do %>
-              <i class="fas fa-star mr-1" style="color:#ffffff"></i>
-              <% end %>
               <% if user_signed_in? %>
                 <%= link_to user_path(current_user.id) do %>
-                <i class="fas fa-list-alt mr-1" style="color:#ffffff"></i>
+                <i class="fas fa-list-alt mr-1" style="color:#ffffff"></i>MY PAGE
                 <% end %>
                 <%= link_to destroy_user_session_path,method: :delete do %>
-                <i class="fas fa-sign-out-alt mr-1" style="color:#ffffff"></i>
+                <i class="fas fa-sign-out-alt mr-1" style="color:#ffffff"></i>LOG OUT
+                <% end %>
+                <%= link_to root_path do %>
+                <i class="fas fa-home mr-1" style="color:#ffffff"></i>TOP
+                <% end %>
+                <%= link_to dreams_path do %>
+                <i class="fas fa-star mr-1" style="color:#ffffff"></i>DREAM
                 <% end %>
               <% end %>
             </div>

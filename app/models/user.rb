@@ -21,7 +21,4 @@ class User < ApplicationRecord
     profile_image.variant(resize: "#{width}x#{height}^", gravity: "center", crop: "#{width}x#{height}+0+0").processed
   end
 
-  def active_for_authentication?
-    super && (is_deleted == false)
-  end
 end

@@ -13,9 +13,10 @@ module YOUMELIST
     config.time_zone = "Tokyo"
     config.i18n.default_locale = :ja
     # Configuration for the application, engines, and railties goes here.
-    #
+    config.autoload_paths += %W(#{config.root}/lib)
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     # config.eager_load_paths << Rails.root.join("extras")
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
   end
 end

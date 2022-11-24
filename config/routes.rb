@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users,controllers:{
-    registrations:"user/registrations"
-    # registrations:"user/registrations",
-    # sessions:"user/sessions"
+    registrations:"user/registrations",
+    sessions:"user/sessions"
   }
   devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
@@ -23,15 +22,13 @@ Rails.application.routes.draw do
         resource:favorites,only:[:create,:destroy]
       end
     end
-    resources:users,only:[:show,:edit,:update] do
+    resources:users,only:[:show,:edit,:update,:destroy] do
       member do
         get :favorites
       end
     end
     resources:lists,only:[:create,:update,:destroy]
-    get "search" => "searches#search"# 検索用
-    get "/users/:id/unsubscribe" => "users#unsubscribe",as: 'unsubscribe'
-    patch "/users/:id/withdrawal" => "users#withdrawal",as: 'withdrawal'
+    get "search" => "searches#search"#検索用
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
