@@ -1,6 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!,except:[:show]
-  before_action :set_user
+  before_action :set_user,except:[:favorites]
   before_action :ensure_normal_user,only:[:edit,:destroy]
 
   def show
@@ -26,7 +26,6 @@ class User::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to root_path
   end
