@@ -1,57 +1,11 @@
 <div class="container">
   <div class="row justify-content-center my-3">
 
-    <div class="col-lg-4 col-md-12">
-      <div class="card mb-3">
-        <div class="card-header" style="background-color:#67a7cc">
-          <span class="text-white h4"><i class="fas fa-portrait mr-1"></i>Profile</span>
-        </div>
-        <div class="card-body">
-          <div class="card-title">
-            <%= image_tag @user.get_profile_image(100,100),class:"rounded-circle"; %>
-            <p class="mt-1"><%= @user.name %></p>
-          </div>
-          <div class="card-subtitle border-top">
-            <p class="mt-4"><%= @user.introduction %></p>
-          </div>
-          <% if user_signed_in? && @user.id == current_user.id %>
-          <div class="card-text border-top">
-            <i class="fas fa-heart mt-3" style="color:#ff7f7f"></i> <%= link_to "いいねしたコメント",favorites_user_path(@user),class:"text-secondary" %>
-            </br>
-            <i class="fas fa-cog"></i> <%= link_to "プロフィール編集",edit_user_path(@user.id),class:"text-secondary" %>
-            <%= render partial: 'user/shared/flash' %>
-          </div>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="card border-0 mb-3">
-        <div class="card-body">
-          <div class="card-title border-bottom">
-            <i class="far fa-clipboard"></i> きろく
-          </div>
-          <div class="card-text">
-            <p><i class="fas fa-star"></i> ユメ : <%= @user.lists.count %>コ</p>
-            <p><i class="fas fa-heart"></i> いいね : <%= @user.favorites.count %>コ</p>
-            <p><i class="fas fa-comment-dots"></i> コメント : <%= @user.comments.count %>コ</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render "profile",user: @user %>
 
     <div class="col-lg-8 col-md-12">
-      <% if user_signed_in? && @user.id == current_user.id %>
-      <%= form_with model:@newdream,url:dreams_path,method: :post do |f| %>
-      <div class="form-row mb-3">
-        <div class="col">
-          <%= f.text_field:content,class:"form-control" %>
-        </div>
-        <div class="col-auto">
-          <%= f.submit "追加する",class:"form-control text-white btn",style:"background-color:#67a7cc" %>
-        </div>
-      </div>
-      <% end %>
-      <% end %>
+      
+      <%= render "dream_form",user: @user,newdream: @newdream %>
 
       <div class="card">
         <div class="card-body">
@@ -59,12 +13,14 @@
             <h4><i class="fas fa-list-alt" style="color:#ffdc00"></i> LIST</h4>
           </div>
 
-          <ul class="list-group list-group-flush text-center">
+          <ul class="list-group list-group-flush">
             <% @lists.each do |list| %>
             <li class="list-group-item d-flex justify-content-between">
+              <span class="text-truncate">
               <%= link_to dream_path(list.dream.id) do %>
                 <span class="text-dark"><%= list.dream.content %></span>
               <% end %>
+              </span>
               <% if user_signed_in? && @user.id == current_user.id %>
                 <%= link_to list_path(list),method: :delete do %>
                   <i class="fas fa-times" style="color:#67a7cc"></i>
@@ -76,6 +32,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

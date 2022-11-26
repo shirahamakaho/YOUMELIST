@@ -22,16 +22,16 @@ ja:
       half_a_minute: "30秒位"
       less_than_x_seconds:
         one: ちょっと
-        other: "%{count}秒未満"
+        other: "ちょっと"
       less_than_x_minutes:
         one: ちょっと
-        other: "%{count}分未満"
+        other: "ちょっと"
       over_x_years:
         one: 1年以上
         other: "%{count}年以上"
       x_seconds:
-        one: 1秒
-        other: "%{count}秒"
+        one: ちょっと
+        other: "ちょっと"
       x_minutes:
         one: 1分
         other: "%{count}分"

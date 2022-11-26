@@ -5,7 +5,7 @@ class User::UsersController < ApplicationController
 
   def show
     @newdream = Dream.new
-    @lists = @user.lists.all
+    @lists = @user.lists.all.latest
   end
 
   def edit

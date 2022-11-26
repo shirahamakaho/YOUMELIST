@@ -2,7 +2,7 @@
   <div class="row justify-content-center text-center">
     <div class="col-md-12 m-4"><%= image_tag"logo-b2.PNG",size:"300x75" %></div>
     <div class="col-md-12">
-      <p>YOUMELISTは、あなたのやりたいこと 「ユメ」 を<br>みんなと共有できるサービスです。</p>
+      <p>YOUMELISTは、あなたのやりたいこと 「ユメ」 を<br>みんなと共有できる場所です。</p>
     </div>
 
     <% if user_signed_in? %>
@@ -12,12 +12,15 @@
     <% else %>
       <div class="col-lg-12">
         <p>リスト作成や、コメントを残すにはログインが必要です。</p>
-        <span><%= link_to "ユメを見に行く",dreams_path,class:"btn btn-outline-warning mr-3" %></span>
-        <span><%= link_to "新規登録する",new_user_registration_path,class:"btn btn-outline-warning mr-3" %></span>
-        <span><%= link_to 'ゲストログイン', user_guest_sign_in_path, method: :post,class:"btn btn-outline-warning" %></span>
+        <span><%= link_to "ユメを見に行く",dreams_path,class:"mr-5",style:"color:#67a7cc" %></span>
+
+        <span><%= link_to 'ゲストログイン', user_guest_sign_in_path, method: :post,style:"color:#67a7cc" %></span>
       </div>
       <div class="col-lg-7 mt-3">
-        <%= link_to "ログインする",new_user_session_path,class:"px-5 btn text-white",style:"background-color:#67a7cc" %>
+        <%= link_to "ログインする",new_user_session_path,class:"mt-2 px-5 btn text-white",style:"background-color:#67a7cc" %>
+      </div>
+      <div class="col-lg-7 mt-3">
+        <%= link_to "新規登録する",new_user_registration_path,class:"px-5 btn text-white",style:"background-color:#67a7cc" %>
       </div>
     <% end %>
   </div>
@@ -33,7 +36,7 @@
     <div class="col-md-6">
       <h4 class="border-bottom">リストをつくる</h4>
         <p>マイページで「ユメ」を入力する事で、<br>あなたのリストに追加されます。<br>
-        この時表示されている数字は、<br>同じ「ユメ」をもつ仲間の数です。</p>
+        <i class="fas fa-user mr-1"></i> <i class="fas fa-comments mx-1"></i> は、それぞれユーザーの数と<br>コメントの数を表わしています。</p>
     </div>
   </div>
 
@@ -45,7 +48,7 @@
       <h4 class="border-bottom">コメントをする</h4>
       <p>「ユメ」では、進捗共有をしたり、情報交換をしたり。<br>
       自由にコメントが残せます。<br>おなじ「ユメ」を持つユーザーのリストも<br>
-      ここから見る事ができます。</p>
+      ここから見に行く事ができます。</p>
     </div>
   </div>
 
@@ -56,7 +59,7 @@
     <div class="col-md-6">
       <h4 class="border-bottom">みんなと共有</h4>
         <p>「みんなのユメ」から<br>自分のリストに追加することもできます。<br>
-        あなたのいろんな「ユメ」を、<br>どんどんリストにしましょう！
+        あなたのいろんな「ユメ」を、<br>どんどんリストにしましょう〜！
         </p>
       </div>
     </div>

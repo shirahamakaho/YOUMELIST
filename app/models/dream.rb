@@ -17,4 +17,8 @@ class Dream < ApplicationRecord
     Dream.find(List.group(:dream_id).order('count(dream_id) desc').pluck(:dream_id))
     # ユーザー数順に並び替え dream_idでグループ分け→多い順に並べる→数字で取り出す
   end
+  
+  def self.comment_ranking
+    Dream.find(Comment.group(:dream_id).order('count(dream_id) desc').pluck(:dream_id))
+  end
 end

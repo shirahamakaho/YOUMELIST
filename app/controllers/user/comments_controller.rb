@@ -14,7 +14,7 @@ class User::CommentsController < ApplicationController
     @dream = Dream.find(params[:dream_id])
     @newlist = List.new
     @list = List.find_by(user_id:current_user.id,dream_id:@dream.id)
-    @comments = @dream.comments.all.order("created_at DESC")
+    @comments = @dream.comments.all.latest
     @comment = Comment.find(params[:id])
     render template:"user/dreams/show"
   end
