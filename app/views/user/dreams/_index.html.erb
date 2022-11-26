@@ -1,0 +1,32 @@
+<ul class="list-group list-group-flush">
+  <% dream.each do |dream| %>
+    <% if dream.users.count > 0 %>
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="text-truncate">
+          <%= link_to dream_path(dream.id) do %>
+          <span class="text-dark"><%= dream.content %></span>
+          <% end %>
+        </div>
+        <div class="row col-auto">
+          <span><i class="fas fa-user mr-1"></i><%= dream.users.count %></span>
+          <span class="mr-1"><i class="fas fa-comments mx-1"></i><%= dream.comments.count %></span>
+          <% if user_signed_in?  %>
+            <%= form_with model:list,url:lists_path,method: :post do |f| %>
+            <%= f.hidden_field:dream_id,:value => dream.id %>
+            <%= f.hidden_field:user_id,:value => current_user.id %>
+            <% if dream.list_in?(current_user) %>
+              <span class="btn btn-sm text-white disabled" style="background-color:#67a7cc">
+              <i class="fas fa-plus"></i>
+              </span>
+            <% else %>
+              <%= button_tag type: "submit",class:"btn btn-sm text-white",style:"background-color:#67a7cc" do %>
+                <span><i class="fas fa-plus"></i></span>
+              <% end %>
+            <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

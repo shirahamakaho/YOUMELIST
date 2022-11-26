@@ -1,10 +1,11 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!,except:[:show]
-  before_action :set_user
+  before_action :set_user,except:[:favorites]
+  before_action :ensure_normal_user,only:[:edit,:destroy]
 
   def show
     @newdream = Dream.new
-    @lists = @user.lists.all
+    @lists = @user.lists.all.latest
   end
 
   def edit
@@ -14,7 +15,7 @@ class User::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_path(@user.id)
     else
-      render 'edit',notice:"名前を入力してください"
+      render 'edit'
     end
   end
 
@@ -24,10 +25,8 @@ class User::UsersController < ApplicationController
     @favorite_comments = Comment.find(favorites)
   end
 
-  def withdrawal
-    @user = User.find(params[:id])
-    @user.update(is_deleted: true)
-    reset_session
+  def destroy
+    @user.destroy
     redirect_to root_path
   end
 
@@ -40,4 +39,12 @@ class User::UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  def ensure_normal_user
+    if @user.email == 'guest@example.com'
+      flash[:warning] = "ゲストユーザーは編集できません！"
+      redirect_to user_path(@user.id)
+    end
+  end
+
 end

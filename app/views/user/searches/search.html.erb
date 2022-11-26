@@ -1,105 +1,25 @@
-<div class="container mt-2">
-  <div class="row justify-content-center p-4">
-    <div class="col-auto">
-    <div class="card border-0" style="background-color:#ffffff">
-      <div class="card-header border-0" style="background-color:#a1c7ec"></div>
-      <div class="card-body text-center">
-        <div class="card-title">
-          <h3 class="border-bottom"><i class="fas fa-star" style="color:#ffdc00"></i> New Dreams !</h3>
-        </div>
-        <div class="card-subtitle">
-          <p>あたらしいユメ</p>
-        </div>
-
-        <div class="card-deck">
-          <% @latestdream.each do |dream| %>
-            <div class="card" style="width:16rem;">
-              <div class="card-body">
-                <div class="card-title">
-                  <%= dream.content.truncate(15) %>
-                </div>
-                <div class="card-subtitle">
-                  <i class="fas fa-user"></i><span class="ml-1"><%= dream.users.count %></span>
-                  <i class="fas fa-comments"></i><span class="ml-1"><%= dream.comments.count %></span>
-                </div>
-                <div class="card-text">
-                  <span><%= link_to "見に行く",dream_path(dream.id),class:"mt-2 btn btn-sm text-white",style:"background-color:#67a7cc" %></span>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container">
+
+  <%= render "user/dreams/latest_dream",latestdream: @latestdream %>
+
   <div class="row my-3">
-
-    <div class="col-4 justify-content-center">
-      <div class="form-row">
-        <div class="col">
-          <%= form_with url:search_path,method: :get do |f| %>
-          <%= f.text_field :word,placeholder:"キーワードを入力",class:"form-control"%>
-        </div>
-         <div class="col-auto">
-          <%= f.hidden_field :range,:value => Dream %>
-          <%= f.hidden_field :search,:value => "pertial_match" %>
-          <%= button_tag type:"submit",class:"btn text-white",style:"background-color:#67a7cc" do %>
-          <i class="fas fa-search"></i>検索
-          <% end %>
-        <% end %>
-        </div>
-      </div>
-      <div class="card border-0 mt-3">
-        <div class="card-body">
-          <div class="card-title border-bottom">
-          <h5>最近コメントが届いたユメ</h5>
-          </div>
-          <% @latestcomment.each do |comment| %>
-          <i class="fas fa-comment-dots"></i>
-          <%= link_to dream_path(comment.dream.id) do %>
-          <%= comment.dream.content %><br>
-          <% end %>
-          <% end %>
-        </div>
-      </div>
+    <div class="col-lg-4 col-md-12 justify-content-center mb-3">
+      <%= render "search_form",model: Dream %>
+      <%= render "user/dreams/latest_comment",latestcomment: @latestcomment %>
     </div>
 
-    <div class="col-8">
+    <div class="col-lg-8 col-md-12">
       <div class="card border-0">
-        <div class="card-body">
-          "<%= @word %>"の検索結果
+        <div class="card-header border-0" style="background-color:#67a7cc">
+          <h4 class="text-white"><i class="fas fa-list-alt" style="color:#ffffff"></i> Dreams</h4>
+        </div>
+        <div class="card-body text-right">
+          <span>"<%= @word %>"の検索結果(<%= @searched_dreams.count %>)</span>
+          
+          <%= render "user/dreams/index",dream: @searched_dreams,list: @list %>
 
-          <% @searched_dreams.each do |dream| %>
-          <% if dream.users.count > 0 %>
-          <div class="card">
-            <div class="card-body">
-              <%= link_to dream_path(dream.id) do %>
-                <i class="fas fa-star"></i> <%= dream.content %>
-              <% end %>
-            </div>
-          <div class="card-footer">
-            <i class="fas fa-user"></i><span class="ml-1"><%= dream.users.count %></span>
-            <i class="fas fa-comments"></i><span class="ml-1"><%= dream.comments.count %></span>
-            <% if user_signed_in? %>
-              <%= form_with model:@list,url:lists_path,method: :post do |f| %>
-              <%= f.hidden_field:dream_id,:value => dream.id %>
-              <%= f.hidden_field:user_id,:value => current_user.id %>
-              <%= button_tag type: "submit",class:"btn btn-sm" do %>
-                <i class="fas fa-plus"></i>
-              <% end %>
-              <% end %>
-            <% end %>
-          </div>
-          </div>
-          <% end %>
-          <% end %>
         </div>
       </div>
     </div>
-
   </div>
 </div>

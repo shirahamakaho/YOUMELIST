@@ -1,9 +1,35 @@
-<h1>ユメ一覧</h1>
-<% @dreams.each do |dream| %>
-<%= dream.content %>
-<%= link_to "削除",admin_dream_path(dream.id),method: :delete %>
-<% end %>
+<div class="container p-2">
+  <h3>ユメ一覧</h3>
+  <div class="row justify-content-center">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ユメ</th>
+          <th scope="col">ユーザー数</th>
+          <th scope="col">コメント数</th>
+          <th scope="col">×</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @dreams.each do |dream| %>
+        <tr>
+          <td><%= dream.content %></td>
+          <td><%= dream.users.count %></td>
+          <td><%= dream.comments.count %></td>
+          <td><%= link_to "×",admin_dream_path(dream.id),method: :delete %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<%= link_to "コメント一覧",admin_comments_path %>
-<%= link_to "ユーザー一覧",admin_users_path %>
-<%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
+  <div class="row justify-content-center">
+    <p>
+      <%= link_to "ユーザー一覧",admin_users_path %>
+       |
+      <%= link_to "コメント一覧",admin_comments_path %>
+       |
+      <%= link_to "ログアウト",destroy_admin_session_path,method: :delete %>
+    </p>
+  </div>
+</div>

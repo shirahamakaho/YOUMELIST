@@ -11,6 +11,12 @@ class User::SessionsController < Devise::SessionsController
     root_path
   end
 
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    flash[:warning] = 'ようこそ！ゲストユーザーとしてログインしました！'
+    redirect_to root_path
+  end
   # GET /resource/sign_in
   # def new
   #   super
@@ -34,9 +40,10 @@ class User::SessionsController < Devise::SessionsController
   def user_state
     @user = User.find_by(email:params[:user][:email])
     return if !@user
-      if (@user.valid_password?(params[:user][:password]) && (@user.is_deleted == "false"))
-      redirect_to new_user_registration_path
-      end
+    if (@user.valid_password?(params[:user][:password]) && (@user.is_deleted == true))
+      flash[:warning] = "このアカウントは使用できません！"
+      redirect_to new_user_session_path
+    end
   end
 
 end

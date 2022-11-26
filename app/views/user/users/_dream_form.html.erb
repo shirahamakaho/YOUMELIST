@@ -1,0 +1,12 @@
+<% if user_signed_in? && user.id == current_user.id %>
+  <%= form_with model:newdream,url:dreams_path,method: :post do |f| %>
+  <div class="form-row mb-3">
+    <div class="col">
+      <%= f.text_field:content,class:"form-control" %>
+    </div>
+    <div class="col-auto">
+      <%= f.submit "追加する",class:"form-control text-white btn",style:"background-color:#67a7cc" %>
+    </div>
+  </div>
+  <% end %>
+<% end %>

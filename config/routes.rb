@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     registrations:"user/registrations",
     sessions:"user/sessions"
   }
+  
+  devise_scope :user do
+    post 'user/guest_sign_in', to: 'user/sessions#guest_sign_in'
+  end
+  
   devise_for :admin,skip:[:registrations,:passwords],controllers:{
     sessions:"admin/sessions"
   }
@@ -18,19 +23,17 @@ Rails.application.routes.draw do
 
   scope module: :user do
     resources:dreams,only:[:index,:show,:create] do
-      resources:comments,only:[:create,:update,:destroy] do
+      resources:comments,only:[:create,:edit,:update,:destroy] do
         resource:favorites,only:[:create,:destroy]
       end
     end
-    resources:users,only:[:show,:edit,:update] do
+    resources:users,only:[:show,:edit,:update,:destroy] do
       member do
         get :favorites
       end
     end
-    resources:lists,only:[:create,:destroy]
-    get "search" => "searches#search"# 検索用
-    get "/users/:id/unsubscribe" => "users#unsubscribe",as: 'unsubscribe'
-    patch "/users/:id/withdrawal" => "users#withdrawal",as: 'withdrawal'
+    resources:lists,only:[:create,:update,:destroy]
+    get "search" => "searches#search"#検索用
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -1,4 +1,5 @@
 class Admin::DreamsController < ApplicationController
+  before_action :authenticate_admin!
   
   def index
     @dreams = Dream.all

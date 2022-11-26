@@ -1,0 +1,47 @@
+ja:
+
+  helpers:
+    submit:
+      create: "コメントする"
+      update: "編集を保存する"
+
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: 1時間
+        other: "%{count}時間"
+      about_x_months:
+        one: 1ヶ月
+        other: "%{count}ヶ月"
+      about_x_years:
+        one: 1年
+        other: "%{count}年"
+      almost_x_years:
+        one: 1年弱
+        other: "%{count}年弱"
+      half_a_minute: "30秒位"
+      less_than_x_seconds:
+        one: ちょっと
+        other: "ちょっと"
+      less_than_x_minutes:
+        one: ちょっと
+        other: "ちょっと"
+      over_x_years:
+        one: 1年以上
+        other: "%{count}年以上"
+      x_seconds:
+        one: ちょっと
+        other: "ちょっと"
+      x_minutes:
+        one: 1分
+        other: "%{count}分"
+      x_days:
+        one: 1日
+        other: "%{count}日"
+      x_months:
+        one: 1ヶ月
+        other: "%{count}ヶ月"
+      x_years:
+        one: 1年
+        other: "%{count}年"
+

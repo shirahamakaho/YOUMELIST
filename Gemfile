@@ -63,3 +63,4 @@ end
 gem "net-pop"
 gem "net-imap"
 gem "image_processing"
+gem 'rails-i18n'

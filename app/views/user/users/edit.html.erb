@@ -1,35 +1,39 @@
 <div class="container mt-3">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
       <div class="card border-0" style="background-color:#ffffff">
         <div class="card-body">
           <div class="card-title border-bottom">
-            <h4><i class="fas fa-portrait mr-1" style="color:#ffdc00"></i>Profile Edit</h4>
+            <h4><i class="fas fa-portrait mr-1" style="color:#ffdc00"></i>Edit Profile</h4>
             </div>
           <div class="row justify-content-center align-items-center text-center">
-            <div class="col-md-5 my-2">
-              <%= image_tag @user.get_profile_image(150,150),class:"mt-3 rounded-circle"; %>
-              <p>現在のプロフィール画像</p>
-              <%= form_with model:@user,url:user_path(@user),method: :patch do |f| %>
-              <%= f.file_field :profile_image,class:"hidden",accept: "image/*" %>
-              <% end %>
+            <div class="col-lg-5 col-md-12 my-2">
+              <%= image_tag @user.get_profile_image(180,180),class:"mt-3 rounded-circle"; %>
+              <p class="text-muted mt-2">現在のプロフィール画像</p>
             </div>
-            <div class="col-md-7">
+
+            <div class="col-lg-7 col-md-12">
               <%= form_with model:@user,url:user_path(@user),method: :patch do |f| %>
               <div class="col text-left">
-              <%= f.label:ユーザーネーム %>
+                <%= f.label:プロフィール画像 %>
               </div>
-              <div class="col-auto">
-              <%= f.text_field:name,class:"form-control" %>
+              <div class="col text-left">
+                <%= f.file_field :profile_image,accept: "image/*" %>
               </div>
               <div class="col text-left mt-3">
-              <%= f.label:プロフィール %>
+                <%= f.label:ユーザーネーム %>
               </div>
               <div class="col-auto">
-              <%= f.text_area:introduction,class:"form-control" %>
+                <%= f.text_field:name,class:"form-control" %>
               </div>
-              <div class="col-auto mt-2">
-              <%= f.submit "保存",class:"form-control text-white",style:"background-color:#67a7cc" %>
+              <div class="col text-left mt-3">
+                <%= f.label:プロフィール %>
+              </div>
+              <div class="col-auto">
+                <%= f.text_area:introduction,class:"form-control" %>
+              </div>
+              <div class="col mt-2">
+                <%= f.submit "変更を保存",class:"form-control text-white",style:"background-color:#67a7cc" %>
               </div>
               <% end %>
             </div>
@@ -41,19 +45,39 @@
   </div>
 
   <div class="row my-3 text-center">
-    <div class="col-md-12">
+    <div class="col-lg-12">
       <div class="card border-0" style="background-color:#ffffff">
         <div class="card-body">
-
           <div class="card-title border-bottom">
             <p><i class="fas fa-envelope"></i> メールアドレス : <%= @user.email %></p>
           </div>
           <div class="card-text">
             <p><%= link_to "ログアウト",destroy_user_session_path,method: :delete,class:"btn btn-outline-secondary mt-2" %></p>
-            <p><%= link_to "アカウント削除", withdrawal_path,method: :patch,class:"btn btn-danger",data:{confilm:"本当に退会しますか？"} %></p>
+            <p class="btn btn-outline-danger" data-toggle="modal" data-target="#Modal">
+            アカウント削除</p>
             <p class="text-secondary"><i class="fas fa-exclamation-triangle"></i> アカウントを削除すると、再度新規登録をする必要があります。</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#67a7cc">
+          <h5><div class="modal-title text-white" id="myModalLabel">
+          <i class="far fa-sad-tear"></i> 本当に削除しますか？</div></h5>
+        </div>
+        <div class="modal-body text-center">
+          <p>
+            アカウントを削除すると<br>あなたの ユーザーデータ<br>リスト、コメント、いいね は<br>
+            <span class="text-danger">全て消去</span>され、復元できません。<br>よろしいですか？
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-dark" data-dismiss="modal">やめる</button>
+          <%= link_to "削除する",user_path,method: :delete,type:"button",class:"btn btn-danger" %>
         </div>
       </div>
     </div>
