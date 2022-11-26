@@ -6,11 +6,13 @@ class User::DreamsController < ApplicationController
       @dreams = Dream.latest
     elsif params[:old]
       @dreams = Dream.old
+    elsif params[:count_user]
+      @dreams = Dream.user_ranking
     else
-      @dreams = Dream.all.order("created_at DESC")
+      @dreams = Dream.latest
     end
     @latestdream = List.limit(3).order("updated_at DESC")
-    @latestcomment = Comment.limit(5).order("created_at DESC")
+    @latestcomment = Comment.limit(5).latest
     @list = List.new
   end
 
@@ -20,7 +22,7 @@ class User::DreamsController < ApplicationController
     if user_signed_in?
       @list = List.find_by(user_id:current_user.id,dream_id:@dream.id)
     end
-    @comments = @dream.comments.all.order("created_at DESC")
+    @comments = @dream.comments.all.latest
     @comment = Comment.new
   end
 

@@ -12,4 +12,9 @@ class Dream < ApplicationRecord
     search = "pertial_match"
     @dream = Dream.where("content LIKE?","%#{word}%")
   end
+  
+  def self.user_ranking
+    Dream.find(List.group(:dream_id).order('count(dream_id) desc').pluck(:dream_id))
+    # ユーザー数順に並び替え dream_idでグループ分け→多い順に並べる→数字で取り出す
+  end
 end

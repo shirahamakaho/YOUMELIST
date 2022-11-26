@@ -1,6 +1,7 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!,except:[:show]
   before_action :set_user
+  before_action :ensure_normal_user,only:[:edit,:destroy]
 
   def show
     @newdream = Dream.new
@@ -39,4 +40,12 @@ class User::UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
+
+  def ensure_normal_user
+    if @user.email == 'guest@example.com'
+      flash[:warning] = "ゲストユーザーは編集できません！"
+      redirect_to user_path(@user.id)
+    end
+  end
+
 end

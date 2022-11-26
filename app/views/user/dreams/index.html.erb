@@ -82,6 +82,7 @@
         <div class="card-body text-right">
           <%= link_to "新しい順",dreams_path(latest: "true"),class:"btn btn-sm btn-outline-secondary" %>
           <%= link_to "古い順",dreams_path(old: "true"),class:"btn btn-sm btn-outline-secondary" %>
+          <%= link_to "ユーザー数順",dreams_path(count_user: "true"),class:"btn btn-sm btn-outline-secondary" %>
 
           <ul class="list-group list-group-flush text-center">
             <% @dreams.each do |dream| %>
