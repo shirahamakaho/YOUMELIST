@@ -1,11 +1,11 @@
 <div class="container">
 
-  <%= render "latest_dream",latestdream: @latestdream %>
+  <%= render "latest_dream",latest_dream: @latest_dream %>
 
   <div class="row my-3">
     <div class="col-lg-4 col-md-12 justify-content-center mb-3">
       <%= render "user/searches/search_form",model: Dream %>
-      <%= render "latest_comment",latestcomment: @latestcomment %>
+      <%= render "latest_comment",latest_comment: @latest_comment %>
     </div>
 
     <div class="col-lg-8 col-md-12">
@@ -19,7 +19,7 @@
           <%= link_to "ユーザー数順",dreams_path(count_user: "true"),class:"btn btn-sm btn-outline-secondary" %>
           <%= link_to "コメント数順",dreams_path(count_comment: "true"),class:"btn btn-sm btn-outline-secondary" %>
 
-          <%= render "user/dreams/index",dream: @dreams,list: @list %>
+          <%= render "user/dreams/index",dream: @dreams,list: @newlist %>
 
         </div>
       </div>

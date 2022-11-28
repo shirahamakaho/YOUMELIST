@@ -8,6 +8,6 @@ class Admin::DreamsController < ApplicationController
   def destroy
     @dream = Dream.find(params[:id])
     @dream.destroy
-    redirect_back(fallback_location: root_path)
+    redirect_to admin_dreams_path
   end
 end

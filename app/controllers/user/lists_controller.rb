@@ -3,7 +3,8 @@ class User::ListsController < ApplicationController
 
   def create
     List.find_or_create_by(user_id:current_user.id,dream_id:list_params[:dream_id])
-    redirect_to user_path(current_user.id)
+    redirect_back(fallback_location: root_path)
+    # 直前のページに戻る
   end
 
   def update

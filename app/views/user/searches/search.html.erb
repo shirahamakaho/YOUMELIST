@@ -1,11 +1,11 @@
 <div class="container">
 
-  <%= render "user/dreams/latest_dream",latestdream: @latestdream %>
+  <%= render "user/dreams/latest_dream",latest_dream: @latest_dream %>
 
   <div class="row my-3">
     <div class="col-lg-4 col-md-12 justify-content-center mb-3">
       <%= render "search_form",model: Dream %>
-      <%= render "user/dreams/latest_comment",latestcomment: @latestcomment %>
+      <%= render "user/dreams/latest_comment",latest_comment: @latest_comment %>
     </div>
 
     <div class="col-lg-8 col-md-12">
@@ -16,7 +16,7 @@
         <div class="card-body text-right">
           <span>"<%= @word %>"の検索結果(<%= @searched_dreams.count %>)</span>
           
-          <%= render "user/dreams/index",dream: @searched_dreams,list: @list %>
+          <%= render "user/dreams/index",dream: @searched_dreams,list: @newlist %>
 
         </div>
       </div>

@@ -3,7 +3,7 @@
     <div class="card-title border-bottom">
       <h6>最近コメントが届いたユメ</h6>
     </div>
-    <% @latestcomment.each do |comment| %>
+    <% latest_comment.each do |comment| %>
       <%= link_to dream_path(comment.dream.id) do %>
       <div class="text-truncate text-dark"><i class="fas fa-comment-dots"></i><%= comment.dream.content %></div>
       <% end %>
