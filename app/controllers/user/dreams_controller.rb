@@ -12,9 +12,9 @@ class User::DreamsController < ApplicationController
     else
       @dreams = Dream.latest
     end
-    @latestdream = List.limit(3).order("updated_at DESC")
-    @latestcomment = Comment.limit(5).latest
-    @list = List.new
+    @latest_dream = List.limit(3).updated
+    @latest_comment = Comment.limit(5).latest
+    @newlist = List.new
   end
 
   def show
@@ -29,7 +29,7 @@ class User::DreamsController < ApplicationController
 
   def create
     if @dream = Dream.find_or_create_by(content:dream_params[:content])
-      # dream_params に入ってる content と同じ content が Dream テーブルにあるか探す、なければ作成、保存
+      # dream_params に入ってる content と同じ content が Dream テーブルにあるか探す!なければ作成、保存
       List.find_or_create_by(user_id:current_user.id,dream_id:@dream.id)
       # current_user_id と @dream の dream_id を List テーブルに保存
       redirect_to user_path(current_user.id)
@@ -43,5 +43,4 @@ class User::DreamsController < ApplicationController
   def dream_params
     params.require(:dream).permit(:content)
   end
-
 end

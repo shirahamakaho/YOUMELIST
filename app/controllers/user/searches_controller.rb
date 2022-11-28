@@ -1,10 +1,10 @@
 class User::SearchesController < ApplicationController
   def search
-    @range = params[:range]
+    range = params[:range]
     @word = params[:word]
     @searched_dreams = Dream.looks(params[:search],@word)
-    @latestdream = List.limit(3).order("updated_at DESC")
-    @latestcomment = Comment.limit(5).latest
-    @list = List.new
+    @latest_dream = List.limit(3).updated
+    @latest_comment = Comment.limit(5).latest
+    @newlist = List.new
   end
 end

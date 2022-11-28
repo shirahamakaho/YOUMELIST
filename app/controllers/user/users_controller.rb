@@ -1,7 +1,8 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!,except:[:show]
   before_action :set_user
-  before_action :ensure_normal_user,only:[:edit,:destroy]
+  before_action :current_user?,except:[:show]
+  before_action :ensure_normal_user,except:[:show,:favorites]
 
   def show
     @newdream = Dream.new
@@ -38,6 +39,14 @@ class User::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def current_user?
+    if
+      current_user == @user
+    else
+      redirect_to user_path(@user.id)
+    end
   end
 
   def ensure_normal_user

@@ -13,30 +13,41 @@
   <body class="text-dark" style="background-color:#f5f9f9">
 
     <header>
-      <nav class="navbar border-bottom" style="background-color:#67a7cc">
-        <div class="container justify-content-between">
-          <div>
-            <%= image_tag"logo-w.PNG",size:"100x25" %>
-          </div>
-          <div>
-            <%= link_to root_path do %>
-            <i class="fas fa-home" style="color:#ffffff"></i>
-            <span class="text-white mr-2">TOP</span>
+      <nav class="navbar navbar-expand-md navbar-dark" style="background-color:#67a7cc">
+        <div class="container">
+          <a class="navbar-brand" href="/"><%= image_tag"logo-w.PNG",size:"100x25" %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <%= link_to root_path do %>
+                  <i class="fas fa-home" style="color:#ffffff"></i>
+                  <span class="text-white mr-2">TOP</span>
+                <% end %>
+              </li>
+            <% if user_signed_in? && !current_admin %>
+              <li class="nav-item">
+                <%= link_to user_path(current_user.id) do %>
+                  <i class="fas fa-list-alt" style="color:#ffffff"></i>
+                  <span class="text-white mr-2">MY PAGE</span>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to dreams_path do %>
+                  <i class="fas fa-star" style="color:#ffffff"></i>
+                  <span class="text-white mr-2">DREAM</span>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path,method: :delete do %>
+                  <i class="fas fa-sign-out-alt" style="color:#ffffff"></i>
+                  <span class="text-white mr-2">LOG OUT</span>
+                <% end %>
+              </li>
             <% end %>
-            <% if user_signed_in? %>
-              <%= link_to user_path(current_user.id) do %>
-              <i class="fas fa-list-alt" style="color:#ffffff"></i>
-              <span class="text-white mr-2">MY PAGE</span>
-              <% end %>
-              <%= link_to dreams_path do %>
-              <i class="fas fa-star" style="color:#ffffff"></i>
-              <span class="text-white mr-2">DREAM</span>
-              <% end %>
-              <%= link_to destroy_user_session_path,method: :delete do %>
-              <i class="fas fa-sign-out-alt" style="color:#ffffff"></i>
-              <span class="text-white mr-2">LOG OUT</span>
-              <% end %>
-            <% end %>
+            </ul>
           </div>
         </div>
       </nav>
